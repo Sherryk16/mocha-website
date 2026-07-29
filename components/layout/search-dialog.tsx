@@ -72,7 +72,7 @@ export function SearchDialog({
                     <Link
                       href={s.href}
                       onClick={onClose}
-                      className="block rounded-md px-3 py-2 text-gray-800 hover:bg-gray-100 hover:text-[#c2185b]"
+                      className="block rounded-md px-3 py-2 text-gray-800 hover:bg-gray-100 hover:text-[#5d4037]"
                     >
                       {s.label}
                     </Link>
@@ -112,7 +112,7 @@ export function SearchDialog({
                         {p.shortDescription}
                       </div>
                     </div>
-                    <div className="text-right text-xs font-semibold text-[#c2185b]">
+                    <div className="text-right text-xs font-semibold text-[#5d4037]">
                       from {formatCurrency(p.variants[0].wholesalePrice)}
                     </div>
                   </Link>

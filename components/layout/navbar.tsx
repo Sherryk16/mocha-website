@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,13 +17,33 @@ import {
 } from "lucide-react";
 
 import { useCart } from "@/lib/cart";
+import type { CatalogGroup } from "@/lib/catalog";
 
 const navLinks = [
-  { label: "Home", href: "/" },
+  { label: "Shop", href: "/products" },
   { label: "About Us", href: "/about" },
-  { label: "Products", href: "/products" },
   { label: "Wholesale", href: "/wholesale" },
   { label: "Contact Us", href: "/contact" },
+];
+
+const CATEGORY_LABELS: Record<CatalogGroup, string> = {
+  coffee: "Premium Coffee",
+  syrups: "Premium Syrups",
+  sauces: "Premium Sauces",
+  spreads: "Spreads",
+  "tea-and-spices": "Tea & Spices",
+  mixes: "Mixes",
+  ingredients: "Premium Ingredients",
+};
+
+const CATEGORY_ORDER: CatalogGroup[] = [
+  "coffee",
+  "syrups",
+  "sauces",
+  "spreads",
+  "tea-and-spices",
+  "mixes",
+  "ingredients",
 ];
 
 export default function Navbar({
@@ -32,6 +52,10 @@ export default function Navbar({
   onOpenSearch?: () => void;
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
+  const [desktopCategoriesOpen, setDesktopCategoriesOpen] = useState(false);
+  const desktopCategoriesRef = useRef<HTMLDivElement | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { count } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -43,11 +67,70 @@ export default function Navbar({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const closeDropdowns = () => {
+      setDesktopCategoriesOpen(false);
+      setMobileCategoriesOpen(false);
+    };
+    window.addEventListener("popstate", closeDropdowns);
+    return () => window.removeEventListener("popstate", closeDropdowns);
+  }, []);
+
+  useEffect(() => {
+    if (!desktopCategoriesOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (
+        desktopCategoriesRef.current &&
+        !desktopCategoriesRef.current.contains(e.target as Node)
+      ) {
+        setDesktopCategoriesOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDesktopCategoriesOpen(false);
+    };
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [desktopCategoriesOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  const openDesktopCategories = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setDesktopCategoriesOpen(true);
+  };
+
+  const scheduleCloseDesktopCategories = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => {
+      setDesktopCategoriesOpen(false);
+    }, 150);
+  };
+
+  const closeDesktopCategories = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setDesktopCategoriesOpen(false);
+  };
+
   const mainNavBg = isHome
     ? scrolled
       ? "bg-gradient-to-b from-black/85 via-black/60 to-transparent"
       : "bg-transparent"
-    : "bg-[#2d6a2d] border-b border-[#1f5a1f] shadow-md";
+    : "bg-coffee-700 border-b border-coffee-900 shadow-md";
 
   const showTopBar = isHome ? !scrolled : true;
 
@@ -55,11 +138,11 @@ export default function Navbar({
     <header className="w-full fixed top-0 left-0 z-50">
       {/* ── Top Bar (Green) ── */}
       {showTopBar && (
-        <div className="hidden sm:block bg-[#2d6a2d] text-white text-sm py-2 px-4">
+        <div className="hidden sm:block bg-coffee-700 text-white text-sm py-2 px-4">
           <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
             <a
               href="tel:3132080888"
-              className="flex items-center gap-2 hover:text-green-200 transition-colors"
+              className="flex items-center gap-2 hover:text-coffee-300 transition-colors"
             >
               <Phone size={14} />
               <span>Phone: 313-208-0888</span>
@@ -67,7 +150,7 @@ export default function Navbar({
 
             <a
               href="mailto:sale@mochawholesale.com"
-              className="flex items-center gap-2 hover:text-green-200 transition-colors"
+              className="flex items-center gap-2 hover:text-coffee-300 transition-colors"
             >
               <Mail size={14} />
               <span>Email Address: sale@mochawholesale.com</span>
@@ -87,11 +170,69 @@ export default function Navbar({
 
           {/* ── Left: Nav Links ── */}
           <div className="hidden lg:flex items-center gap-1 flex-1 justify-start">
-              {navLinks.map((link) => (
+            {/* Home */}
+            <Link
+              href="/"
+              className="flex items-center gap-1 px-3 py-2 text-white font-medium text-sm hover:text-coffee-200 transition-colors whitespace-nowrap"
+            >
+              Home
+            </Link>
+
+            {/* Categories Dropdown */}
+            <div
+              ref={desktopCategoriesRef}
+              className="relative"
+              onMouseEnter={openDesktopCategories}
+              onMouseLeave={scheduleCloseDesktopCategories}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  setDesktopCategoriesOpen((v) => !v)
+                }
+                aria-haspopup="menu"
+                aria-expanded={desktopCategoriesOpen}
+                className="flex items-center gap-1 px-3 py-2 text-white font-medium text-sm hover:text-coffee-200 transition-colors whitespace-nowrap"
+              >
+                Categories
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-200 ${
+                    desktopCategoriesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {desktopCategoriesOpen && (
+                <div
+                  role="menu"
+                  onMouseEnter={openDesktopCategories}
+                  onMouseLeave={scheduleCloseDesktopCategories}
+                  className="absolute left-0 top-full mt-2 w-64 rounded-xl border border-white/15 shadow-2xl backdrop-blur-md ring-1 ring-black/5"
+                  style={{ backgroundColor: "rgba(255,255,255,0.98)" }}
+                >
+                  <div className="py-2">
+                    {CATEGORY_ORDER.map((key) => (
+                      <Link
+                        key={key}
+                        href={`/products?group=${key}`}
+                        role="menuitem"
+                        onClick={closeDesktopCategories}
+                        className="block px-4 py-2 text-sm text-gray-900 hover:bg-coffee-100 hover:text-coffee-700 transition-colors"
+                      >
+                        {CATEGORY_LABELS[key]}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="flex items-center gap-1 px-3 py-2 text-white font-medium text-sm hover:text-green-300 transition-colors whitespace-nowrap"
+                className="flex items-center gap-1 px-3 py-2 text-white font-medium text-sm hover:text-coffee-200 transition-colors whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -114,7 +255,7 @@ export default function Navbar({
           <div className="hidden lg:flex items-center gap-3 flex-1 justify-end">
             <Link
               href="/wholesale"
-              className="bg-[#c2185b] hover:bg-[#9c0e4a] text-white text-sm font-semibold px-4 py-2.5 rounded transition-colors whitespace-nowrap"
+              className="bg-[#5d4037] hover:bg-[#3e2723] text-white text-sm font-semibold px-4 py-2.5 rounded transition-colors whitespace-nowrap"
             >
               Request a Quote
             </Link>
@@ -129,7 +270,7 @@ export default function Navbar({
             <button
               type="button"
               onClick={onOpenSearch}
-              className="text-white hover:text-green-300 p-2 transition-colors"
+              className="text-white hover:text-coffee-200 p-2 transition-colors"
               aria-label="Search"
             >
               <Search size={20} />
@@ -137,12 +278,12 @@ export default function Navbar({
 
             <Link
               href="/cart"
-              className="text-white hover:text-green-300 p-2 relative transition-colors"
+              className="text-white hover:text-coffee-200 p-2 relative transition-colors"
               aria-label="Cart"
             >
               <ShoppingCart size={20} />
               {count > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#c2185b] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-[#5d4037] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                   {count}
                 </span>
               )}
@@ -150,13 +291,13 @@ export default function Navbar({
 
             <Link
               href="/account/login"
-              className="text-white hover:text-green-300 p-2 transition-colors"
+              className="text-white hover:text-coffee-200 p-2 transition-colors"
               aria-label="Account"
             >
               <User size={20} />
             </Link>
 
-            <button className="flex items-center gap-1 text-white hover:text-green-300 text-sm font-medium transition-colors">
+            <button className="flex items-center gap-1 text-white hover:text-coffee-200 text-sm font-medium transition-colors">
               <Globe size={16} />
               <span>EN</span>
               <ChevronDown size={14} />
@@ -175,12 +316,58 @@ export default function Navbar({
 
         {/* ── Mobile Menu ── */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#1a3d1a] text-white px-4 pb-6 space-y-1">
+          <div className="lg:hidden bg-coffee-900 text-white px-4 pb-6 space-y-1">
+            {/* Home */}
+            <Link
+              href="/"
+              className="block py-3 border-b border-coffee-800 text-sm font-medium hover:text-coffee-200 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+
+            {/* Categories accordion */}
+            <button
+              type="button"
+              onClick={() => setMobileCategoriesOpen((v) => !v)}
+              aria-expanded={mobileCategoriesOpen}
+              className="w-full flex items-center justify-between py-3 border-b border-coffee-800 text-sm font-medium hover:text-coffee-200 transition-colors"
+            >
+              Categories
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 ${
+                  mobileCategoriesOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {mobileCategoriesOpen && (
+              <div className="pl-3 pb-2 space-y-1 border-b border-coffee-800">
+                <Link
+                  href="/products"
+                  className="block py-2 text-sm font-semibold text-coffee-300 hover:text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  All Products
+                </Link>
+                {CATEGORY_ORDER.map((key) => (
+                  <Link
+                    key={key}
+                    href={`/products?group=${key}`}
+                    className="block py-2 text-sm hover:text-coffee-200 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {CATEGORY_LABELS[key]}
+                  </Link>
+                ))}
+              </div>
+            )}
+
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="block py-3 border-b border-green-800 text-sm font-medium hover:text-green-300 transition-colors"
+                className="block py-3 border-b border-coffee-800 text-sm font-medium hover:text-coffee-200 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
@@ -190,7 +377,7 @@ export default function Navbar({
             <div className="pt-4 flex flex-col gap-3">
               <Link
                 href="/wholesale"
-                className="bg-[#c2185b] text-white text-sm font-semibold px-4 py-3 rounded text-center"
+                className="bg-[#5d4037] text-white text-sm font-semibold px-4 py-3 rounded text-center"
               >
                 Request a Quote
               </Link>
@@ -214,7 +401,7 @@ export default function Navbar({
               <Link href="/cart" className="text-white relative" aria-label="Cart">
                 <ShoppingCart size={20} />
                 {count > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#c2185b] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-[#5d4037] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                     {count}
                   </span>
                 )}

@@ -6,16 +6,18 @@ import { IconFacebook, IconInstagram, IconTikTok, IconWhatsApp } from "@/compone
 
 export function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden pt-48">
+    <footer className="relative w-full overflow-hidden pt-72">
       {/* Background image */}
       <Image
-        src="/footer-bg.png"
+        src="/footer-bg1.png"
         alt=""
         fill
         priority
         sizes="100vw"
         className="object-cover"
       />
+      {/* Solid gap between page content and background image */}
+      <div className="absolute inset-x-0 top-0 h-72 bg-transparent" />
       <div className="relative z-10">
         <Container className="grid grid-cols-1 gap-6 pt-20 pb-4 md:grid-cols-4">
           <FooterCell
@@ -124,7 +126,7 @@ function FooterCell({
 }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c2185b]">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-coffee-200">
         {title}
       </p>
       {items ? (
@@ -134,7 +136,7 @@ function FooterCell({
       {link ? (
         <Link
           href={link.href}
-          className="mt-3 inline-block text-sm font-semibold text-white hover:text-[#c2185b]"
+          className="mt-3 inline-block text-sm font-semibold text-white hover:text-coffee-200"
         >
           {link.label}
         </Link>
@@ -152,7 +154,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c2185b]">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-coffee-200">
         {title}
       </p>
       <ul className="mt-3 space-y-2 text-sm">
@@ -182,7 +184,7 @@ function SocialChip({ label, href }: { label: string; href: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 p-2.5 text-white transition hover:bg-[#c2185b] hover:scale-110"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 p-2.5 text-white transition hover:bg-[#5d4037] hover:scale-110"
       aria-label={label}
     >
       {Icon ? <Icon className="h-5 w-5" /> : label}

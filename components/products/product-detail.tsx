@@ -118,7 +118,7 @@ function DetailBody({
           <div
             className={cn(
               "group relative aspect-square overflow-hidden rounded-2xl border border-gray-200 bg-white transition-shadow duration-500",
-              zoom ? "shadow-2xl ring-2 ring-[#c2185b]" : "hover:shadow-xl"
+              zoom ? "shadow-2xl ring-2 ring-[#5d4037]" : "hover:shadow-xl"
             )}
             onMouseEnter={() => setZoom(true)}
             onMouseLeave={() => setZoom(false)}
@@ -138,8 +138,8 @@ function DetailBody({
           </div>
 
           <div className="mt-4 flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#2d6a2d]/10">
-              <IconCheck className="h-4 w-4 text-[#2d6a2d]" />
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-coffee-700/10">
+              <IconCheck className="h-4 w-4 text-coffee-700" />
             </span>
             <span className="font-medium">
               In stock · Same-week shipping from Dearborn, MI
@@ -151,7 +151,7 @@ function DetailBody({
       {/* ── Right: details ── */}
       <div>
         <ScrollReveal direction="right" duration={700}>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2d6a2d]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-coffee-700">
             {category || "Mocha Wholesale"}
           </p>
           <h1 className="mt-2 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">
@@ -179,7 +179,7 @@ function DetailBody({
                 className={cn(
                   "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold",
                   variant.inStock > 100
-                    ? "bg-[#2d6a2d]/10 text-[#2d6a2d]"
+                    ? "bg-coffee-700/10 text-coffee-700"
                     : variant.inStock > 0
                       ? "bg-amber-100 text-amber-800"
                       : "bg-red-100 text-red-700"
@@ -212,7 +212,7 @@ function DetailBody({
                     className={cn(
                       "flex items-start justify-between gap-2 rounded-xl border p-3 text-left transition-all duration-200",
                       v.id === variantId
-                        ? "border-[#c2185b] bg-[#c2185b]/5 ring-1 ring-[#c2185b] scale-[1.01]"
+                        ? "border-[#5d4037] bg-[#5d4037]/5 ring-1 ring-[#5d4037] scale-[1.01]"
                         : "border-gray-200 bg-white hover:border-gray-400 hover:scale-[1.01]"
                     )}
                   >
@@ -314,7 +314,7 @@ function DetailBody({
                     {tastingNotes.map((n) => (
                       <li
                         key={n}
-                        className="rounded-full bg-[#c2185b]/10 px-3 py-1 text-xs font-semibold text-[#c2185b] transition-colors hover:bg-[#c2185b] hover:text-white"
+                        className="rounded-full bg-[#5d4037]/10 px-3 py-1 text-xs font-semibold text-[#5d4037] transition-colors hover:bg-[#5d4037] hover:text-white"
                       >
                         {n}
                       </li>
@@ -388,7 +388,7 @@ function Benefit({
 }) {
   return (
     <div className="group rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-      <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#c2185b]/10 text-[#c2185b] transition-colors duration-300 group-hover:bg-[#c2185b] group-hover:text-white">
+      <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#5d4037]/10 text-[#5d4037] transition-colors duration-300 group-hover:bg-[#5d4037] group-hover:text-white">
         {icon}
       </div>
       <p className="mt-3 text-sm font-bold text-gray-900">{title}</p>

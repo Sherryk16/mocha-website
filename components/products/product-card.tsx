@@ -53,7 +53,7 @@ export function ProductCard(props: CardItem) {
           className="object-contain p-5 transition-transform duration-300 group-hover:scale-105"
         />
         {pricingMode === "wholesale" && (
-          <span className="absolute right-2 top-2 rounded bg-[#2d6a2d] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+          <span className="absolute right-2 top-2 rounded bg-coffee-700 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
             Wholesale
           </span>
         )}
@@ -63,7 +63,7 @@ export function ProductCard(props: CardItem) {
         <p className="truncate text-[11px] font-semibold uppercase tracking-wider text-gray-500">
           {brand}
         </p>
-        <h3 className="line-clamp-2 text-sm font-semibold text-gray-900 group-hover:text-[#c2185b]">
+        <h3 className="line-clamp-2 text-sm font-semibold text-gray-900 group-hover:text-[#5d4037]">
           {name}
         </h3>
 
@@ -76,7 +76,7 @@ export function ProductCard(props: CardItem) {
               {variant.size}
             </p>
           </div>
-          <span className="inline-flex items-center gap-1 rounded-full bg-[#c2185b] px-3 py-1.5 text-xs font-semibold text-white transition group-hover:bg-[#9c0e4a]">
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#5d4037] px-3 py-1.5 text-xs font-semibold text-white transition group-hover:bg-[#3e2723]">
             View
             <IconArrowRight className="h-3 w-3" />
           </span>

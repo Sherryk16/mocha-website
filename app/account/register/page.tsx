@@ -46,7 +46,7 @@ export default function RegisterPage() {
       <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl sm:rounded-3xl">
         <div className="grid lg:grid-cols-[1fr_1.1fr]">
           {/* ── Left: marketing / illustration panel ── */}
-          <aside className="relative hidden overflow-hidden bg-gradient-to-br from-[#c2185b] via-[#9c0e4a] to-[#3a0a1f] p-10 text-white lg:flex lg:flex-col lg:justify-between">
+          <aside className="relative hidden overflow-hidden bg-gradient-to-br from-[#5d4037] via-[#3e2723] to-[#1b0f0a] p-10 text-white lg:flex lg:flex-col lg:justify-between">
             <div
               aria-hidden
               className="absolute inset-0 opacity-30"
@@ -73,12 +73,12 @@ export default function RegisterPage() {
                 <br />
                 Built for your bar.
               </h2>
-              <p className="max-w-md text-base leading-relaxed text-pink-100/90">
+              <p className="max-w-md text-base leading-relaxed text-coffee-100/90">
                 One account for retail browsing, order history, and wholesale
                 applications. Manage every café, restaurant or office location
                 from a single dashboard.
               </p>
-              <ul className="space-y-2.5 text-sm text-pink-100/90">
+              <ul className="space-y-2.5 text-sm text-coffee-100/90">
                 {[
                   "Save products & reorder in one click",
                   "Early access to seasonal offerings",
@@ -92,7 +92,7 @@ export default function RegisterPage() {
               </ul>
             </div>
 
-            <p className="relative z-10 mt-12 text-xs text-pink-100/70">
+            <p className="relative z-10 mt-12 text-xs text-coffee-100/70">
               Michigan-based wholesale coffee & café supplier since 2018 ·{" "}
               <Link href="/" className="underline hover:text-white">
                 Back to home
@@ -105,7 +105,7 @@ export default function RegisterPage() {
             <div className="mx-auto max-w-md">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 transition-colors hover:text-[#9c0e4a]"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-coffee-600 transition-colors hover:text-[#3e2723]"
               >
                 ← Back
               </Link>
@@ -154,7 +154,7 @@ export default function RegisterPage() {
                       placeholder="you@business.com"
                       className={cn(
                         "block w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-3.5 text-sm text-gray-900 placeholder:text-gray-400",
-                        "focus:border-[#c2185b] focus:outline-none focus:ring-2 focus:ring-[#c2185b]/20"
+                        "focus:border-[#5d4037] focus:outline-none focus:ring-2 focus:ring-[#5d4037]/20"
                       )}
                     />
                   </div>
@@ -178,7 +178,7 @@ export default function RegisterPage() {
                       placeholder="At least 8 characters"
                       className={cn(
                         "block w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-10 text-sm text-gray-900 placeholder:text-gray-400",
-                        "focus:border-[#c2185b] focus:outline-none focus:ring-2 focus:ring-[#c2185b]/20"
+                        "focus:border-[#5d4037] focus:outline-none focus:ring-2 focus:ring-[#5d4037]/20"
                       )}
                     />
                     <button
@@ -218,7 +218,7 @@ export default function RegisterPage() {
                   Have an account?{" "}
                   <Link
                     href="/account/login"
-                    className="font-semibold text-[#c2185b] transition-colors hover:text-[#9c0e4a]"
+                    className="font-semibold text-[#5d4037] transition-colors hover:text-[#3e2723]"
                   >
                     Sign in
                   </Link>
@@ -265,7 +265,7 @@ function Field({
           required={required}
           className={cn(
             "block w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-3.5 text-sm text-gray-900 placeholder:text-gray-400",
-            "focus:border-[#c2185b] focus:outline-none focus:ring-2 focus:ring-[#c2185b]/20"
+            "focus:border-[#5d4037] focus:outline-none focus:ring-2 focus:ring-[#5d4037]/20"
           )}
         />
       </div>

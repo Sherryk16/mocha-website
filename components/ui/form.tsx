@@ -24,9 +24,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         ref={ref}
         id={inputId}
         className={cn(
-          "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
+          "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#5d4037] focus:outline-none focus:ring-1 focus:ring-[#5d4037]",
           error &&
-            "border-pink-500 focus:border-pink-500 focus:ring-pink-500",
+            "border-coffee-700 focus:border-coffee-700 focus:ring-coffee-700",
           className
         )}
         {...rest}
@@ -63,9 +63,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            "block min-h-[120px] w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
+            "block min-h-[120px] w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#5d4037] focus:outline-none focus:ring-1 focus:ring-[#5d4037]",
             error &&
-              "border-pink-500 focus:border-pink-500 focus:ring-pink-500",
+              "border-coffee-700 focus:border-coffee-700 focus:ring-coffee-700",
             className
           )}
           {...rest}
@@ -106,9 +106,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         ref={ref}
         id={inputId}
         className={cn(
-          "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
+          "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 focus:border-[#5d4037] focus:outline-none focus:ring-1 focus:ring-[#5d4037]",
           error &&
-            "border-pink-500 focus:border-pink-500 focus:ring-pink-500",
+            "border-coffee-700 focus:border-coffee-700 focus:ring-coffee-700",
           className
         )}
         {...rest}

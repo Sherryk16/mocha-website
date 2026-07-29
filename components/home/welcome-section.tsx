@@ -28,7 +28,7 @@ export function WelcomeSection() {
           </p>
 
           <h2 className="leading-[1.05]">
-            <span className="block text-3xl font-extrabold text-[#c2185b] sm:text-4xl md:text-5xl">
+            <span className="block text-3xl font-extrabold text-[#5d4037] sm:text-4xl md:text-5xl">
               Port Mocha
             </span>
             <span className="block text-3xl font-extrabold text-gray-900 sm:text-4xl md:text-5xl">
@@ -52,7 +52,7 @@ export function WelcomeSection() {
           <div className="mt-5 flex flex-wrap gap-3">
             <a
               href="/products"
-              className="group inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#c2185b] px-6 text-sm font-bold text-white shadow-md shadow-pink-900/20 transition-all duration-300 hover:scale-[1.03] hover:bg-[#9c0e4a]"
+              className="group inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#5d4037] px-6 text-sm font-bold text-white shadow-md shadow-coffee-900/20 transition-all duration-300 hover:scale-[1.03] hover:bg-[#3e2723]"
             >
               Shop Now
               <svg

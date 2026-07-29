@@ -51,7 +51,7 @@ export default function TermsPage() {
             Questions about these terms?{" "}
             <Link
               href="mailto:sale@mochawholesale.com"
-              className="font-semibold text-[#c2185b] underline"
+              className="font-semibold text-[#5d4037] underline"
             >
               Email the wholesale desk
             </Link>

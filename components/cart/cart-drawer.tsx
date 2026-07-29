@@ -69,7 +69,7 @@ export function CartDrawer() {
               <Link
                 href="/products"
                 onClick={closeCart}
-                className="mt-5 inline-flex h-11 items-center rounded-full bg-[#c2185b] px-6 text-sm font-bold text-white shadow-sm transition hover:bg-[#9c0e4a]"
+                className="mt-5 inline-flex h-11 items-center rounded-full bg-[#5d4037] px-6 text-sm font-bold text-white shadow-sm transition hover:bg-[#3e2723]"
               >
                 Browse products
               </Link>
@@ -96,7 +96,7 @@ export function CartDrawer() {
                         <Link
                           href={`/products/${item.productSlug}`}
                           onClick={closeCart}
-                          className="text-sm font-semibold text-gray-900 hover:text-[#c2185b]"
+                          className="text-sm font-semibold text-gray-900 hover:text-[#5d4037]"
                         >
                           {item.productName}
                         </Link>

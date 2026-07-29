@@ -3,12 +3,24 @@
 :root {
   --background: #ffffff;
   --foreground: #111111;
-  --accent: #c2185b;
-  --accent-soft: #f8e6ee;
+  --accent: #5d4037;
+  --accent-soft: #efebe9;
   --danger: #b94a3b;
-  --success: #4d7c3a;
+  --success: #6d4c41;
   --muted: #6b7280;
   --border: #e5e7eb;
+
+  --coffee-50: #faf5f1;
+  --coffee-100: #efebe9;
+  --coffee-200: #d7ccc8;
+  --coffee-300: #bcaaa4;
+  --coffee-400: #a1887f;
+  --coffee-500: #795548;
+  --coffee-600: #6d4c41;
+  --coffee-700: #5d4037;
+  --coffee-800: #4e342e;
+  --coffee-900: #3e2723;
+  --coffee-950: #1b0f0a;
 }
 
 @theme inline {
@@ -20,6 +32,17 @@
   --color-success: var(--success);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-coffee-50: var(--coffee-50);
+  --color-coffee-100: var(--coffee-100);
+  --color-coffee-200: var(--coffee-200);
+  --color-coffee-300: var(--coffee-300);
+  --color-coffee-400: var(--coffee-400);
+  --color-coffee-500: var(--coffee-500);
+  --color-coffee-600: var(--coffee-600);
+  --color-coffee-700: var(--coffee-700);
+  --color-coffee-800: var(--coffee-800);
+  --color-coffee-900: var(--coffee-900);
+  --color-coffee-950: var(--coffee-950);
   --font-sans: var(--font-inter);
   --font-display: var(--font-display);
 }
@@ -185,7 +208,7 @@ button {
 
 /* Smooth focus rings */
 *:focus-visible {
-  outline: 2px solid #c2185b;
+  outline: 2px solid #5d4037;
   outline-offset: 2px;
   border-radius: 4px;
 }

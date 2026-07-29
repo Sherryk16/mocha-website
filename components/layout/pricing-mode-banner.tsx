@@ -15,7 +15,7 @@ export function PricingModeBanner() {
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
       <div className="flex flex-wrap items-center gap-3 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4">
         <div className="flex flex-1 flex-wrap items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#2d6a2d]/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#2d6a2d]">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-coffee-700/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-coffee-700">
             <ShieldCheck size={13} />
             Pricing
           </span>
@@ -34,7 +34,7 @@ export function PricingModeBanner() {
             className={cn(
               "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition",
               pricingMode === "retail"
-                ? "bg-[#c2185b] text-white shadow"
+                ? "bg-[#5d4037] text-white shadow"
                 : "text-gray-700 hover:bg-gray-100"
             )}
           >
@@ -53,7 +53,7 @@ export function PricingModeBanner() {
             className={cn(
               "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition",
               pricingMode === "wholesale"
-                ? "bg-[#2d6a2d] text-white shadow"
+                ? "bg-coffee-700 text-white shadow"
                 : "text-gray-700 hover:bg-gray-100",
               !isApproved && "cursor-not-allowed opacity-60"
             )}
@@ -68,7 +68,7 @@ export function PricingModeBanner() {
           Want member pricing?{" "}
           <a
             href="/wholesale"
-            className="font-semibold text-[#c2185b] underline underline-offset-2 hover:text-[#9c0e4a]"
+            className="font-semibold text-[#5d4037] underline underline-offset-2 hover:text-[#3e2723]"
           >
             Apply for a wholesale account
           </a>

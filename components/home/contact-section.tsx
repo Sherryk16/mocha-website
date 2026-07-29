@@ -9,7 +9,7 @@ export function ContactSection() {
     <section className="w-full bg-neutral-100 py-16 px-6">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight">
-          <span className="text-[#c2185b]">Send Us</span>{" "}
+          <span className="text-[#5d4037]">Send Us</span>{" "}
           <span className="text-gray-900">a Message</span>
         </h2>
         <p className="mt-3 text-gray-600 text-base sm:text-lg">
@@ -26,7 +26,7 @@ export function ContactSection() {
               <input
                 type="text"
                 required
-                className="w-full bg-transparent border-0 border-b border-gray-400 pb-2 focus:outline-none focus:border-[#c2185b]"
+                className="w-full bg-transparent border-0 border-b border-gray-400 pb-2 focus:outline-none focus:border-[#5d4037]"
               />
             </div>
             <div>
@@ -36,7 +36,7 @@ export function ContactSection() {
               <input
                 type="email"
                 required
-                className="w-full bg-transparent border-0 border-b border-gray-400 pb-2 focus:outline-none focus:border-[#c2185b]"
+                className="w-full bg-transparent border-0 border-b border-gray-400 pb-2 focus:outline-none focus:border-[#5d4037]"
               />
             </div>
             <div>
@@ -45,7 +45,7 @@ export function ContactSection() {
               </label>
               <input
                 type="text"
-                className="w-full bg-transparent border-0 border-b border-gray-400 pb-2 focus:outline-none focus:border-[#c2185b]"
+                className="w-full bg-transparent border-0 border-b border-gray-400 pb-2 focus:outline-none focus:border-[#5d4037]"
               />
             </div>
           </div>
@@ -55,7 +55,7 @@ export function ContactSection() {
               type="checkbox"
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
-              className="mt-1 w-4 h-4 accent-[#c2185b]"
+              className="mt-1 w-4 h-4 accent-[#5d4037]"
             />
             <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
               I consent to the collection, use, storage, and processing of my
@@ -64,7 +64,7 @@ export function ContactSection() {
               purpose of managing my inquiry, order, account, or
               subscription. This includes order fulfillment, payment
               processing, and customer service, in accordance with the{" "}
-              <a href="/privacy" className="text-[#c2185b] font-semibold">
+              <a href="/privacy" className="text-[#5d4037] font-semibold">
                 Privacy Notice
               </a>
               .
@@ -81,7 +81,7 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={!consent}
-              className="border border-[#c2185b] text-[#c2185b] font-semibold px-8 py-3 rounded hover:bg-[#c2185b] hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="border border-[#5d4037] text-[#5d4037] font-semibold px-8 py-3 rounded hover:bg-[#5d4037] hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Submit
             </button>

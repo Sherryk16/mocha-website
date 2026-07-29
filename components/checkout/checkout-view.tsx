@@ -39,7 +39,7 @@ export function CheckoutView() {
   if (orderId) {
     return (
       <div className="mx-auto max-w-xl rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#2d6a2d] text-white">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-coffee-700 text-white">
           <IconCheck className="h-7 w-7" />
         </span>
         <h2 className="mt-5 text-3xl font-bold text-gray-900">Order placed.</h2>
@@ -50,7 +50,7 @@ export function CheckoutView() {
         </p>
         <Link
           href="/products"
-          className="mt-6 inline-flex h-11 items-center rounded-full bg-[#c2185b] px-6 text-sm font-bold text-white shadow-sm transition hover:bg-[#9c0e4a]"
+          className="mt-6 inline-flex h-11 items-center rounded-full bg-[#5d4037] px-6 text-sm font-bold text-white shadow-sm transition hover:bg-[#3e2723]"
         >
           Keep shopping
         </Link>
@@ -88,7 +88,7 @@ export function CheckoutView() {
               className={cn(
                 "rounded-xl border p-4 text-left transition",
                 mode === "guest"
-                  ? "border-[#c2185b] bg-pink-50 ring-1 ring-[#c2185b]"
+                  ? "border-[#5d4037] bg-coffee-100 ring-1 ring-[#5d4037]"
                   : "border-gray-200 bg-white hover:border-gray-400"
               )}
             >
@@ -105,7 +105,7 @@ export function CheckoutView() {
               className={cn(
                 "rounded-xl border p-4 text-left transition",
                 mode === "signin"
-                  ? "border-[#c2185b] bg-pink-50 ring-1 ring-[#c2185b]"
+                  ? "border-[#5d4037] bg-coffee-100 ring-1 ring-[#5d4037]"
                   : "border-gray-200 bg-white hover:border-gray-400"
               )}
             >
@@ -121,7 +121,7 @@ export function CheckoutView() {
               {!user && mode === "signin" && (
                 <Link
                   href="/account/login?return=/checkout"
-                  className="mt-2 inline-block text-xs font-semibold text-[#c2185b] underline"
+                  className="mt-2 inline-block text-xs font-semibold text-[#5d4037] underline"
                 >
                   Sign in / Register →
                 </Link>
@@ -222,7 +222,7 @@ export function CheckoutView() {
                 name="paymentMethod"
                 value="card"
                 defaultChecked
-                className="h-4 w-4 accent-[#c2185b]"
+                className="h-4 w-4 accent-[#5d4037]"
               />
               <div>
                 <p className="text-sm font-semibold text-gray-900">
@@ -246,7 +246,7 @@ export function CheckoutView() {
                 name="paymentMethod"
                 value="net30"
                 disabled={!(user?.role === "wholesale" && user.approved)}
-                className="h-4 w-4 accent-[#c2185b]"
+                className="h-4 w-4 accent-[#5d4037]"
               />
               <div>
                 <p className="text-sm font-semibold text-gray-900">
@@ -263,7 +263,7 @@ export function CheckoutView() {
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/cart"
-            className="text-sm font-semibold text-gray-700 hover:text-[#c2185b]"
+            className="text-sm font-semibold text-gray-700 hover:text-[#5d4037]"
           >
             ← Back to cart
           </Link>
@@ -314,7 +314,7 @@ export function CheckoutView() {
             label="Shipping"
             value={
               shipping === 0 ? (
-                <span className="font-semibold text-[#2d6a2d]">Free</span>
+                <span className="font-semibold text-coffee-700">Free</span>
               ) : (
                 formatCurrency(shipping)
               )

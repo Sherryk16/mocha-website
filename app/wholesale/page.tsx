@@ -59,7 +59,7 @@ export default function WholesalePage() {
                 key={b.title}
                 className="rounded-2xl border border-gray-200 bg-white p-5"
               >
-                <Icon className="h-6 w-6 text-[#2d6a2d]" />
+                <Icon className="h-6 w-6 text-coffee-700" />
                 <h3 className="mt-3 text-lg font-semibold text-gray-900">
                   {b.title}
                 </h3>
@@ -74,7 +74,7 @@ export default function WholesalePage() {
             </p>
             <Link
               href="/account/login?return=/wholesale"
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#c2185b] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#9c0e4a]"
+              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#5d4037] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#3e2723]"
             >
               Sign in →
             </Link>

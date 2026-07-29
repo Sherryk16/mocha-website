@@ -105,13 +105,13 @@ export default async function ProductPage({
       <section className="border-b border-gray-200 bg-white">
         <Container className="py-6 sm:py-8">
           <nav className="flex flex-wrap items-center gap-1.5 text-xs text-gray-500">
-            <Link href="/" className="hover:text-[#c2185b] transition-colors">
+            <Link href="/" className="hover:text-[#5d4037] transition-colors">
               Home
             </Link>
             <span className="text-gray-300">/</span>
             <Link
               href="/products"
-              className="hover:text-[#c2185b] transition-colors"
+              className="hover:text-[#5d4037] transition-colors"
             >
               Products
             </Link>
@@ -124,7 +124,7 @@ export default async function ProductPage({
                       ? `/products?group=${catalog.group}`
                       : `/products?category=${breadcrumbLabel}`
                   }
-                  className="hover:text-[#c2185b] transition-colors"
+                  className="hover:text-[#5d4037] transition-colors"
                 >
                   {displayCategoryLabel}
                 </Link>
@@ -152,7 +152,7 @@ export default async function ProductPage({
           <Container className="py-12 sm:py-16">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c2185b]">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#5d4037]">
                   You may also like
                 </p>
                 <h2 className="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -165,7 +165,7 @@ export default async function ProductPage({
                     ? `/products?group=${catalog.group}`
                     : `/products?category=${breadcrumbLabel}`
                 }
-                className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition-all hover:-translate-y-0.5 hover:border-[#c2185b] hover:text-[#c2185b]"
+                className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition-all hover:-translate-y-0.5 hover:border-[#5d4037] hover:text-[#5d4037]"
               >
                 See all →
               </Link>

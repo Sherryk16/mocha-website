@@ -47,7 +47,7 @@ export default function PrivacyPage() {
             Want a copy of your data or to close your account?{" "}
             <Link
               href="mailto:sale@mochawholesale.com"
-              className="font-semibold text-[#c2185b] underline"
+              className="font-semibold text-[#5d4037] underline"
             >
               Email the wholesale desk
             </Link>

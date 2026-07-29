@@ -68,7 +68,7 @@ export function CartView() {
                 </p>
                 <Link
                   href={`/products/${item.productSlug}`}
-                  className="text-base font-semibold text-gray-900 hover:text-[#c2185b]"
+                  className="text-base font-semibold text-gray-900 hover:text-[#5d4037]"
                 >
                   {item.productName}
                 </Link>
@@ -109,7 +109,7 @@ export function CartView() {
                 <button
                   type="button"
                   onClick={() => removeItem(item.variantId)}
-                  className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-[#c2185b]"
+                  className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-[#5d4037]"
                 >
                   <IconTrash className="h-3 w-3" />
                   Remove
@@ -130,7 +130,7 @@ export function CartView() {
             label="Shipping"
             value={
               shipping === 0 ? (
-                <span className="text-[#2d6a2d] font-semibold">Free</span>
+                <span className="text-coffee-700 font-semibold">Free</span>
               ) : (
                 formatCurrency(shipping)
               )

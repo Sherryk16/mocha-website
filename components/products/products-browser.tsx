@@ -50,7 +50,7 @@ export function ProductsBrowser() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-sm text-gray-900 focus:border-[#c2185b] focus:outline-none"
+            className="rounded-md border border-gray-200 bg-white px-2.5 py-1.5 text-sm text-gray-900 focus:border-[#5d4037] focus:outline-none"
           >
             <option value="featured">Featured</option>
             <option value="price-asc">Retail price: low → high</option>
@@ -119,7 +119,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
           className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
         />
         {pricingMode === "wholesale" && (
-          <span className="absolute right-2 top-2 rounded bg-[#2d6a2d] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+          <span className="absolute right-2 top-2 rounded bg-coffee-700 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
             Wholesale
           </span>
         )}
@@ -128,7 +128,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
       <div className="flex flex-1 flex-col gap-1.5 p-4">
         <Link
           href={`/products/${item.slug}`}
-          className="line-clamp-1 text-sm font-semibold text-gray-900 hover:text-[#c2185b] sm:text-[15px]"
+          className="line-clamp-1 text-sm font-semibold text-gray-900 hover:text-[#5d4037] sm:text-[15px]"
         >
           {item.name}
         </Link>
@@ -146,7 +146,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
           <button
             type="button"
             onClick={handleAdd}
-            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-[#c2185b] text-xs font-bold text-white transition hover:bg-[#9c0e4a] active:scale-[0.98] sm:text-sm"
+            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-[#5d4037] text-xs font-bold text-white transition hover:bg-[#3e2723] active:scale-[0.98] sm:text-sm"
           >
             <svg
               viewBox="0 0 24 24"

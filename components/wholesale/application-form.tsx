@@ -53,7 +53,7 @@ export function WholesaleApplicationForm() {
   if (submitted) {
     return (
       <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#2d6a2d] text-white">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-coffee-700 text-white">
           <IconCheck className="h-7 w-7" />
         </span>
         <h2 className="mt-5 text-3xl font-bold text-gray-900">
@@ -168,7 +168,7 @@ export function WholesaleApplicationForm() {
       {step === 2 && (
         <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#2d6a2d]/10 text-[#2d6a2d]">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-coffee-700/10 text-coffee-700">
               <IconShield className="h-5 w-5" />
             </span>
             <div>
@@ -197,17 +197,17 @@ export function WholesaleApplicationForm() {
                 placeholder="38-1234567"
                 inputMode="numeric"
                 className={cn(
-                  "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 font-mono text-base text-gray-900 placeholder:text-gray-400 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
+                  "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 font-mono text-base text-gray-900 placeholder:text-gray-400 focus:border-[#5d4037] focus:outline-none focus:ring-1 focus:ring-[#5d4037]",
                   einInput.length > 0 &&
                     !einValid &&
-                    "border-pink-500 focus:border-pink-500 focus:ring-pink-500"
+                    "border-coffee-700 focus:border-coffee-700 focus:ring-coffee-700"
                 )}
               />
               <span
                 className={cn(
                   "mt-1 block text-xs",
                   einInput.length === 0 && "text-gray-500",
-                  einValid && "text-[#2d6a2d]",
+                  einValid && "text-coffee-700",
                   einInput.length > 0 && !einValid && "text-red-600"
                 )}
               >
@@ -277,7 +277,7 @@ export function WholesaleApplicationForm() {
               type="checkbox"
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-gray-300 accent-[#c2185b] focus:ring-[#c2185b]"
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 accent-[#5d4037] focus:ring-[#5d4037]"
               required
             />
             <span>
@@ -334,7 +334,7 @@ function Stepper({ step }: { step: 1 | 2 | 3 }) {
             className={cn(
               "inline-flex h-8 w-8 items-center justify-center rounded-full border-2 font-bold transition",
               step >= s.n
-                ? "border-[#c2185b] bg-[#c2185b] text-white"
+                ? "border-[#5d4037] bg-[#5d4037] text-white"
                 : "border-gray-300 bg-white text-gray-400"
             )}
           >
@@ -352,7 +352,7 @@ function Stepper({ step }: { step: 1 | 2 | 3 }) {
             <span
               className={cn(
                 "ml-2 h-px w-10 transition sm:w-16",
-                step > s.n ? "bg-[#c2185b]" : "bg-gray-300"
+                step > s.n ? "bg-[#5d4037]" : "bg-gray-300"
               )}
             />
           )}

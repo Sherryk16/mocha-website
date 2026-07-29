@@ -41,7 +41,7 @@ export function AboutSection() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href="/about"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#c2185b] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:scale-[1.03] hover:bg-[#9c0e4a]"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#5d4037] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:scale-[1.03] hover:bg-[#3e2723]"
             >
               Our story
               <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

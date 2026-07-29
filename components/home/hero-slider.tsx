@@ -8,12 +8,12 @@ import { IconArrowRight } from "@/components/ui/icons";
 
 const SLIDES = [
   {
-    image: "/bg.png",
+    image: "/bg5.png",
     title: "Welcome to Port Mocha",
     body: "Premium coffee wholesale for cafés, restaurants, and offices. Fresh-roasted beans delivered direct to your door.",
   },
   {
-    image: "/bg1.png",
+    image: "/bg4.png",
     title: "Your Partner in Premium Coffee",
     body: "Single-origin beans and signature blends roasted weekly. Built for cafés that won't compromise on quality.",
   },
@@ -74,7 +74,7 @@ export function HeroSlider() {
             <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">
               <Link
                 href="/products"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded bg-[#c2185b] px-6 text-sm font-semibold text-white hover:bg-[#9c0e4a]"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded bg-[#5d4037] px-6 text-sm font-semibold text-white hover:bg-[#3e2723]"
               >
                 Shop Coffee
                 <IconArrowRight className="h-4 w-4" />

@@ -41,7 +41,7 @@ export function Testimonials() {
               className="flex h-full flex-col justify-between rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow"
             >
               <div>
-                <div className="flex items-center gap-0.5 text-accent">
+                <div className="flex items-center gap-0.5 text-coffee-700">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <IconStar key={i} className="h-4 w-4" />
                   ))}

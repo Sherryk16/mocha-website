@@ -55,9 +55,9 @@ export function ValueProps() {
                 delay={i * 100}
                 duration={600}
               >
-                <div className="group rounded-2xl border border-gray-200 bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[#c2185b] hover:shadow-lg">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#2d6a2d]/10 transition-colors duration-300 group-hover:bg-[#2d6a2d]/20">
-                    <Icon className="h-6 w-6 text-[#2d6a2d] transition-transform duration-300 group-hover:scale-110" />
+                <div className="group rounded-2xl border border-gray-200 bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[#5d4037] hover:shadow-lg">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-coffee-700/10 transition-colors duration-300 group-hover:bg-coffee-700/20">
+                    <Icon className="h-6 w-6 text-coffee-700 transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <h3 className="mt-4 text-lg font-semibold text-gray-900">
                     {v.title}
@@ -75,7 +75,7 @@ export function ValueProps() {
         >
           <Link
             href="/wholesale"
-            className="group inline-flex items-center gap-2 rounded-full bg-[#c2185b] px-7 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:scale-[1.04] hover:bg-[#9c0e4a] hover:shadow-xl"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#5d4037] px-7 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:scale-[1.04] hover:bg-[#3e2723] hover:shadow-xl"
           >
             Apply for Wholesale Account
             <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

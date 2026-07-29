@@ -56,7 +56,7 @@ function LoginForm() {
       <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl sm:rounded-3xl">
       <div className="grid lg:grid-cols-[1fr_1.1fr]">
         {/* ── Left: marketing / illustration panel ── */}
-        <aside className="relative hidden overflow-hidden bg-gradient-to-br from-[#22c55e] via-[#15803d] to-[#052e16] p-10 text-white lg:flex lg:flex-col lg:justify-between">
+        <aside className="relative hidden overflow-hidden bg-gradient-to-br from-coffee-400 via-coffee-700 to-coffee-950 p-10 text-white lg:flex lg:flex-col lg:justify-between">
           <div
             aria-hidden
             className="absolute inset-0 opacity-30"
@@ -79,18 +79,18 @@ function LoginForm() {
 
           <div className="relative z-10 mt-12 space-y-6">
             <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl">
-              <span className="inline-block rounded-lg bg-white px-3 py-1 text-[#15803d] shadow-lg shadow-emerald-900/30">
+              <span className="inline-block rounded-lg bg-white px-3 py-1 text-coffee-700 shadow-lg shadow-coffee-900/30">
                 Welcome back.
               </span>
               <br />
               <span className="text-white">Your shelves are waiting.</span>
             </h2>
-            <p className="max-w-md text-base leading-relaxed text-emerald-50/90">
+            <p className="max-w-md text-base leading-relaxed text-coffee-100/90">
               Sign in to manage orders, view invoices, and reorder the
               products your business depends on. Premium coffee, syrups,
               sauces and café essentials — all in one account.
             </p>
-            <ul className="space-y-2.5 text-sm text-emerald-50/90">
+            <ul className="space-y-2.5 text-sm text-coffee-100/90">
               {[
                 "Track orders & standing deliveries",
                 "Reorder previous purchases in a click",
@@ -104,7 +104,7 @@ function LoginForm() {
             </ul>
           </div>
 
-          <p className="relative z-10 mt-12 text-xs text-emerald-50/70">
+          <p className="relative z-10 mt-12 text-xs text-coffee-100/70">
             Michigan-based wholesale coffee & café supplier since 2018 ·{" "}
             <Link href="/" className="underline hover:text-white">
               Back to home
@@ -117,7 +117,7 @@ function LoginForm() {
           <div className="mx-auto max-w-md">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 transition-colors hover:text-[#9c0e4a]"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-coffee-700 transition-colors hover:text-coffee-900"
             >
               ← Back
             </Link>
@@ -149,7 +149,7 @@ function LoginForm() {
                     placeholder="you@business.com"
                     className={cn(
                       "block w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-3.5 text-sm text-gray-900 placeholder:text-gray-400",
-                      "focus:border-[#c2185b] focus:outline-none focus:ring-2 focus:ring-[#c2185b]/20"
+                      "focus:border-coffee-700 focus:outline-none focus:ring-2 focus:ring-coffee-700/20"
                     )}
                   />
                 </div>
@@ -165,7 +165,7 @@ function LoginForm() {
                   </label>
                   <Link
                     href="#"
-                    className="text-xs font-semibold text-pink-600 transition-colors hover:text-[#9c0e4a]"
+                    className="text-xs font-semibold text-coffee-700 transition-colors hover:text-coffee-900"
                   >
                     Forgot password?
                   </Link>
@@ -180,7 +180,7 @@ function LoginForm() {
                     placeholder="Your password"
                     className={cn(
                       "block w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-10 text-sm text-gray-900 placeholder:text-gray-400",
-                      "focus:border-[#c2185b] focus:outline-none focus:ring-2 focus:ring-[#c2185b]/20"
+                      "focus:border-coffee-700 focus:outline-none focus:ring-2 focus:ring-coffee-700/20"
                     )}
                   />
                   <button
@@ -215,7 +215,7 @@ function LoginForm() {
                 New here?{" "}
                 <Link
                   href="/account/register"
-                  className="font-semibold text-[#c2185b] transition-colors hover:text-[#9c0e4a]"
+                  className="font-semibold text-coffee-700 transition-colors hover:text-coffee-900"
                 >
                   Create an account
                 </Link>
@@ -231,7 +231,7 @@ function LoginForm() {
                 To access wholesale pricing, apply with your EIN.{" "}
                 <Link
                   href="/wholesale"
-                  className="font-semibold text-[#c2185b] underline underline-offset-2 transition-colors hover:text-[#9c0e4a]"
+                  className="font-semibold text-coffee-700 underline underline-offset-2 transition-colors hover:text-coffee-900"
                 >
                   Apply for wholesale
                 </Link>

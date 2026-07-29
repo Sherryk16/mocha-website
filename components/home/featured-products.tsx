@@ -93,7 +93,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
           className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
         />
         {pricingMode === "wholesale" && (
-          <span className="absolute right-2 top-2 rounded bg-[#2d6a2d] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+          <span className="absolute right-2 top-2 rounded bg-coffee-700 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
             Wholesale
           </span>
         )}
@@ -102,7 +102,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
       <div className="flex flex-1 flex-col gap-1.5 p-3 sm:p-4">
         <Link
           href={`/products/${item.slug}`}
-          className="line-clamp-1 text-sm font-semibold text-gray-900 hover:text-[#c2185b]"
+          className="line-clamp-1 text-sm font-semibold text-gray-900 hover:text-[#5d4037]"
         >
           {item.name}
         </Link>
@@ -120,7 +120,7 @@ function ProductCard({ item }: { item: CatalogItem }) {
           <button
             type="button"
             onClick={handleAdd}
-            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-[#c2185b] text-xs font-bold text-white transition hover:bg-[#9c0e4a] active:scale-[0.98]"
+            className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-[#5d4037] text-xs font-bold text-white transition hover:bg-[#3e2723] active:scale-[0.98]"
           >
             <svg
               viewBox="0 0 24 24"
@@ -184,7 +184,7 @@ function CategorySlider({
               type="button"
               aria-label={`Scroll ${label} left`}
               onClick={() => scrollBy(-1)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm transition hover:border-[#c2185b] hover:text-[#c2185b]"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm transition hover:border-[#5d4037] hover:text-[#5d4037]"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -202,7 +202,7 @@ function CategorySlider({
               type="button"
               aria-label={`Scroll ${label} right`}
               onClick={() => scrollBy(1)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm transition hover:border-[#c2185b] hover:text-[#c2185b]"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm transition hover:border-[#5d4037] hover:text-[#5d4037]"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -248,7 +248,7 @@ export function FeaturedProducts({ grouped: _grouped }: { grouped: unknown }) {
       <Container>
         <ScrollReveal direction="up" className="text-center">
           <h2 className="text-2xl font-extrabold sm:text-4xl lg:text-5xl">
-            <span className="text-[#c2185b]">Featured</span>{" "}
+            <span className="text-[#5d4037]">Featured</span>{" "}
             <span className="text-gray-900">Products</span>
           </h2>
           <p className="mx-auto mt-2 max-w-2xl px-2 text-sm text-gray-600 sm:mt-3 sm:text-base">
@@ -269,7 +269,7 @@ export function FeaturedProducts({ grouped: _grouped }: { grouped: unknown }) {
         <ScrollReveal direction="up" className="mt-10 text-center sm:mt-14">
           <Link
             href="/products"
-            className="group inline-flex items-center gap-2 rounded-full bg-[#c2185b] px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:scale-[1.04] hover:bg-[#9c0e4a] hover:shadow-xl sm:px-8 sm:py-3.5"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#5d4037] px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:scale-[1.04] hover:bg-[#3e2723] hover:shadow-xl sm:px-8 sm:py-3.5"
           >
             View All Products
             <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

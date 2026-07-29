@@ -203,7 +203,7 @@ function StatusPill({ ok, label }: { ok: boolean; label: string }) {
     <span
       className={
         ok
-          ? "inline-flex items-center gap-1.5 rounded-full bg-[#2d6a2d]/10 px-3 py-1 text-xs font-semibold text-[#2d6a2d]"
+          ? "inline-flex items-center gap-1.5 rounded-full bg-coffee-700/10 px-3 py-1 text-xs font-semibold text-coffee-700"
           : "inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-800"
       }
     >
@@ -230,8 +230,8 @@ function DashCard({
       href={href}
       className={
         highlight
-          ? "group flex items-start justify-between gap-3 rounded-xl border border-[#c2185b] bg-[#c2185b] p-4 text-white shadow-sm transition hover:bg-[#9c0e4a]"
-          : "group flex items-start justify-between gap-3 rounded-xl border border-gray-200 bg-white p-4 transition hover:border-[#c2185b]"
+          ? "group flex items-start justify-between gap-3 rounded-xl border border-coffee-700 bg-coffee-700 p-4 text-white shadow-sm transition hover:bg-coffee-900"
+          : "group flex items-start justify-between gap-3 rounded-xl border border-gray-200 bg-white p-4 transition hover:border-coffee-700"
       }
     >
       <div>
@@ -256,7 +256,7 @@ function DashCard({
         className={
           highlight
             ? "h-4 w-4 text-white"
-            : "h-4 w-4 text-gray-400 group-hover:text-[#c2185b]"
+            : "h-4 w-4 text-gray-400 group-hover:text-coffee-700"
         }
       />
     </Link>

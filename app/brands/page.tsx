@@ -45,7 +45,7 @@ export default function BrandsPage() {
               </div>
               <div>
                 <span
-                  className="inline-block h-1.5 w-12 rounded-full bg-[#c2185b]"
+                  className="inline-block h-1.5 w-12 rounded-full bg-[#5d4037]"
                   style={{ background: brand.accent }}
                 />
                 <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">
@@ -58,7 +58,7 @@ export default function BrandsPage() {
                 <div className="mt-6 flex flex-wrap items-center gap-3">
                   <Link
                     href={`/brands/${brand.slug}`}
-                    className="inline-flex items-center gap-2 rounded-full bg-[#c2185b] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#9c0e4a]"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#5d4037] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#3e2723]"
                   >
                     Explore {brand.name}
                     <IconArrowRight className="h-4 w-4" />

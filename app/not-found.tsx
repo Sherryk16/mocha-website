@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#c2185b]">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#5d4037]">
         404
       </p>
       <Heading className="mt-2">This page wandered off.</Heading>

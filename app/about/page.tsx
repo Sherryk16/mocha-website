@@ -57,7 +57,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/60" />
           <Container className="relative z-10 flex h-full items-center">
             <div className="max-w-2xl">
-              <Eyebrow className="text-[#c2185b]">About us</Eyebrow>
+              <Eyebrow className="text-[#5d4037]">About us</Eyebrow>
               <h1 className="mt-3 text-4xl font-bold leading-tight text-white sm:text-5xl text-balance">
                 Built for cafés that don't have time for surprises.
               </h1>
@@ -123,7 +123,7 @@ export default function AboutPage() {
                   key={v.title}
                   className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
                 >
-                  <Icon className="h-6 w-6 text-[#2d6a2d]" />
+                  <Icon className="h-6 w-6 text-coffee-700" />
                   <h3 className="mt-3 text-lg font-semibold text-gray-900">
                     {v.title}
                   </h3>
@@ -136,7 +136,7 @@ export default function AboutPage() {
       </section>
       <Container className="py-16 sm:py-20">
         <div className="mx-auto max-w-2xl rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm">
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#c2185b] text-white">
+          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#5d4037] text-white">
             <IconCheck className="h-6 w-6" />
           </span>
           <h2 className="mt-4 text-2xl font-bold text-gray-900">
@@ -149,7 +149,7 @@ export default function AboutPage() {
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
               href="/wholesale"
-              className="inline-flex h-11 items-center gap-2 rounded-full bg-[#c2185b] px-6 text-sm font-bold text-white shadow-md transition hover:bg-[#9c0e4a]"
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-[#5d4037] px-6 text-sm font-bold text-white shadow-md transition hover:bg-[#3e2723]"
             >
               Apply for wholesale
               <IconArrowRight className="h-4 w-4" />

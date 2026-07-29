@@ -33,7 +33,7 @@ export function AnnouncementBar() {
               </span>
               <Link
                 href="/wholesale"
-                className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-coffee-900 hover:bg-accent-soft"
+                className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white hover:bg-accent-soft hover:text-coffee-900"
               >
                 Apply for wholesale
                 <IconArrowRight className="h-3 w-3" />

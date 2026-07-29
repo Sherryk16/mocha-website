@@ -57,7 +57,7 @@ export default async function BrandPage({
                 className="inline-block h-1.5 w-12 rounded-full"
                 style={{ background: brand.accent }}
               />
-              <Eyebrow className="mt-3 text-[#c2185b]">
+              <Eyebrow className="mt-3 text-[#5d4037]">
                 {brand.origin}
               </Eyebrow>
               <h1 className="mt-2 text-4xl font-bold leading-tight text-white sm:text-5xl">
@@ -90,7 +90,7 @@ export default async function BrandPage({
           </div>
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 rounded-full bg-[#c2185b] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#9c0e4a]"
+            className="inline-flex items-center gap-2 rounded-full bg-[#5d4037] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#3e2723]"
           >
             All products
             <IconArrowRight className="h-4 w-4" />

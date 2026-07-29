@@ -67,11 +67,11 @@ function ContactBlock({
       href={href}
       className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
     >
-      <Icon className="h-6 w-6 text-[#c2185b]" />
+      <Icon className="h-6 w-6 text-[#5d4037]" />
       <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
         {label}
       </p>
-      <p className="mt-1 text-lg font-semibold text-gray-900 group-hover:text-[#c2185b]">
+      <p className="mt-1 text-lg font-semibold text-gray-900 group-hover:text-[#5d4037]">
         {value}
       </p>
     </a>
