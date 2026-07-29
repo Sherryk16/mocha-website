@@ -14,7 +14,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="border-b border-gray-200 bg-white">
-        <Container className="py-12 sm:py-16">
+<Container className="py-10 sm:py-12 lg:py-16">
           <Eyebrow>Contact</Eyebrow>
           <Heading className="mt-2">Talk to a real person.</Heading>
           <p className="mt-3 max-w-xl text-gray-700">

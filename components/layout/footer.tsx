@@ -2,11 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/layout";
-import { IconFacebook, IconInstagram, IconTikTok, IconWhatsApp } from "@/components/ui/icons";
+import {
+  IconFacebook,
+  IconInstagram,
+  IconTikTok,
+  IconWhatsApp,
+} from "@/components/ui/icons";
 
 export function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden pt-72">
+    <footer className="relative w-full overflow-hidden pt-44 sm:pt-72">
       {/* Background image */}
       <Image
         src="/footer-bg1.png"
@@ -17,9 +22,9 @@ export function Footer() {
         className="object-cover"
       />
       {/* Solid gap between page content and background image */}
-      <div className="absolute inset-x-0 top-0 h-72 bg-transparent" />
+      <div className="absolute inset-x-0 top-0 h-44 bg-transparent sm:h-72" />
       <div className="relative z-10">
-        <Container className="grid grid-cols-1 gap-6 pt-20 pb-4 md:grid-cols-4">
+        <Container className="grid grid-cols-1 gap-8 pt-12 pb-6 sm:gap-6 sm:pt-20 sm:pb-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
           <FooterCell
             title="We work with"
             items={["HOLLANDER", "MONIN", "1883", "GHIRARDELLI"]}
@@ -42,7 +47,7 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 border-t border-white/10">
-        <Container className="grid grid-cols-1 gap-10 pt-8 pb-14 lg:grid-cols-4">
+        <Container className="grid grid-cols-1 gap-8 pt-8 pb-10 sm:grid-cols-2 sm:gap-10 sm:pb-14 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <Link href="/">
               <Image
@@ -50,27 +55,40 @@ export function Footer() {
                 alt="Mocha Wholesale"
                 width={280}
                 height={84}
-                className="h-auto w-64 object-contain"
+                className="h-auto w-44 object-contain sm:w-64"
               />
             </Link>
             <p className="mt-4 text-sm text-gray-300">
               Michigan-based wholesale coffee & café supplier. From sourcing to
-              shelf, we keep cafés, restaurants and offices brewing with confidence.
+              shelf, we keep cafés, restaurants and offices brewing with
+              confidence.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <SocialChip label="Facebook" href="https://facebook.com" />
               <SocialChip label="Instagram" href="https://instagram.com" />
               <SocialChip label="TikTok" href="https://tiktok.com" />
-              <SocialChip label="WhatsApp" href="https://wa.me/13132080888" />
+              <SocialChip
+                label="WhatsApp"
+                href="https://wa.me/13132080888"
+              />
             </div>
           </div>
           <FooterColumn
             title="Shop"
             links={[
               { label: "All Products", href: "/products" },
-              { label: "Premium Coffee", href: "/products?category=premium-coffee" },
-              { label: "Premium Sauces", href: "/products?category=premium-sauces" },
-              { label: "Premium Syrups", href: "/products?category=premium-syrups" },
+              {
+                label: "Premium Coffee",
+                href: "/products?category=premium-coffee",
+              },
+              {
+                label: "Premium Sauces",
+                href: "/products?category=premium-sauces",
+              },
+              {
+                label: "Premium Syrups",
+                href: "/products?category=premium-syrups",
+              },
               { label: "Matcha", href: "/products?category=matcha" },
             ]}
           />
@@ -78,8 +96,14 @@ export function Footer() {
             title="Brands"
             links={[
               { label: "White Rhino Coffee", href: "/brands/white-rhino" },
-              { label: "Barista Underground", href: "/brands/barista-underground" },
-              { label: "Coffee Bean Corral", href: "/brands/coffee-bean-corral" },
+              {
+                label: "Barista Underground",
+                href: "/brands/barista-underground",
+              },
+              {
+                label: "Coffee Bean Corral",
+                href: "/brands/coffee-bean-corral",
+              },
             ]}
           />
           <FooterColumn
@@ -96,9 +120,12 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 border-t border-white/10">
-        <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-gray-400 sm:flex-row">
-          <p>© {new Date().getFullYear()} Mocha Wholesale · 15401 Century Dr., Suite 301, Dearborn, MI 48120</p>
-          <div className="flex flex-wrap items-center gap-4">
+        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-xs text-gray-400 sm:flex-row sm:gap-2">
+          <p className="text-center sm:text-left">
+            © {new Date().getFullYear()} Mocha Wholesale · 15401 Century Dr.,
+            Suite 301, Dearborn, MI 48120
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="/privacy" className="hover:text-white">
               Do not sell or share my personal information
             </Link>
@@ -130,9 +157,25 @@ function FooterCell({
         {title}
       </p>
       {items ? (
-        <p className="mt-1 text-lg text-white">{items.join(" · ")}</p>
+        <ul className="mt-3 flex flex-wrap gap-2 sm:hidden">
+          {items.map((it) => (
+            <li
+              key={it}
+              className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white"
+            >
+              {it}
+            </li>
+          ))}
+        </ul>
       ) : null}
-      {body ? <p className="mt-2 text-sm text-gray-300">{body}</p> : null}
+      {items ? (
+        <p className="mt-1 hidden text-base text-white sm:block sm:text-lg">
+          {items.join(" · ")}
+        </p>
+      ) : null}
+      {body ? (
+        <p className="mt-2 text-sm leading-relaxed text-gray-300">{body}</p>
+      ) : null}
       {link ? (
         <Link
           href={link.href}
@@ -160,7 +203,10 @@ function FooterColumn({
       <ul className="mt-3 space-y-2 text-sm">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-gray-300 hover:text-white hover:underline">
+            <Link
+              href={l.href}
+              className="text-gray-300 hover:text-white hover:underline"
+            >
               {l.label}
             </Link>
           </li>
@@ -170,14 +216,23 @@ function FooterColumn({
   );
 }
 
-const socialIcons: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+const socialIcons: Record<
+  string,
+  React.FC<React.SVGProps<SVGSVGElement>>
+> = {
   Facebook: IconFacebook,
   Instagram: IconInstagram,
   TikTok: IconTikTok,
   WhatsApp: IconWhatsApp,
 };
 
-function SocialChip({ label, href }: { label: string; href: string }) {
+function SocialChip({
+  label,
+  href,
+}: {
+  label: string;
+  href: string;
+}) {
   const Icon = socialIcons[label];
   return (
     <a

@@ -1,24 +1,16 @@
-import Image from "next/image";
 import { Container } from "@/components/ui/layout";
 
-type Partner = {
-  name: string;
-  src: string;
-  width: number;
-  height: number;
-};
-
-const PARTNERS: Partner[] = [
-  { name: "1883", src: "/partners/1883.png", width: 164, height: 171 },
-  { name: "Monin", src: "/partners/monin.webp", width: 352, height: 89 },
-  { name: "Hollander", src: "/partners/hollander.webp", width: 182, height: 182 },
-  { name: "Chobani", src: "/partners/chobani.png", width: 922, height: 230 },
-  { name: "Eversys", src: "/partners/eversys.webp", width: 300, height: 47 },
+const PARTNERS = [
+  { name: "1883", src: "/partners/1883.png" },
+  { name: "Monin", src: "/partners/monin.webp" },
+  { name: "Hollander", src: "/partners/hollander.webp" },
+  { name: "Chobani", src: "/partners/chobani.png" },
+  { name: "Eversys", src: "/partners/eversys.webp" },
 ];
 
 export function PartnersSection() {
   return (
-    <section className="bg-coffee-50 py-16 sm:py-20">
+    <section className="bg-coffee-50 py-12 sm:py-20">
       <Container>
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-coffee-700">
@@ -33,31 +25,23 @@ export function PartnersSection() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8 lg:grid-cols-5">
-          {PARTNERS.map((p, i) => {
-            const targetHeight = 100;
-            const targetWidth = Math.round(
-              (targetHeight / p.height) * p.width,
-            );
-            return (
-              <div
-                key={p.name}
-                className="flex h-40 items-center justify-center rounded-2xl border border-coffee-700/20 bg-white px-4 py-6 shadow-sm transition hover:border-coffee-700"
-                data-partner={p.name}
-                data-index={i}
-              >
-                <Image
-                  src={p.src}
-                  alt={p.name}
-                  width={targetWidth}
-                  height={targetHeight}
-                  unoptimized
-                  priority
-                  className="block"
-                />
-              </div>
-            );
-          })}
+        <div className="mt-10 grid grid-cols-5 items-center justify-items-center gap-x-3 gap-y-6 sm:mt-14 sm:gap-x-12 sm:gap-y-10">
+          {PARTNERS.map((p) => (
+            <div
+              key={p.name}
+              className="flex h-full w-full items-center justify-center"
+              title={p.name}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.src}
+                alt={p.name}
+                loading="lazy"
+                decoding="async"
+                className="block h-10 w-auto object-contain transition-transform duration-300 hover:scale-105 sm:h-20 md:h-24 lg:h-28"
+              />
+            </div>
+          ))}
         </div>
       </Container>
     </section>

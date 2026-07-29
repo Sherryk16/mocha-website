@@ -69,8 +69,8 @@ export default function AboutPage() {
           </Container>
         </div>
       </section>
-      <Container className="py-16 sm:py-20">
-        <div className="grid items-start gap-12 lg:grid-cols-2">
+      <Container className="py-12 sm:py-16 lg:py-20">
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
             <Eyebrow>Our story</Eyebrow>
             <Heading className="mt-2">
@@ -112,7 +112,7 @@ export default function AboutPage() {
         </div>
       </Container>
       <section className="bg-white">
-        <Container className="py-16 sm:py-20">
+        <Container className="py-12 sm:py-16 lg:py-20">
           <Eyebrow>What we stand on</Eyebrow>
           <Heading className="mt-2">Four things we don't compromise on.</Heading>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -134,7 +134,7 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
-      <Container className="py-16 sm:py-20">
+      <Container className="py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-2xl rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm">
           <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#5d4037] text-white">
             <IconCheck className="h-6 w-6" />

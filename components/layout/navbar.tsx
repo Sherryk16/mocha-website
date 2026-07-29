@@ -316,7 +316,7 @@ export default function Navbar({
 
         {/* ── Mobile Menu ── */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-coffee-900 text-white px-4 pb-6 space-y-1">
+          <div className="lg:hidden bg-coffee-900 text-white px-4 pb-6 pt-2 space-y-1">
             {/* Home */}
             <Link
               href="/"

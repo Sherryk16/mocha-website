@@ -50,7 +50,7 @@ export default function WholesalePage() {
           </nav>
         </Container>
       </section>
-      <Container className="grid gap-12 py-12 lg:grid-cols-[1fr_2fr]">
+      <Container className="grid gap-10 py-10 sm:gap-12 sm:py-12 lg:grid-cols-[1fr_2fr]">
         <aside className="space-y-5">
           {BENEFITS.map((b) => {
             const Icon = b.icon;
