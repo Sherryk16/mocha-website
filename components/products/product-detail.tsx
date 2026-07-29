@@ -1,283 +1,398 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
-import { IconCart, IconCheck, IconShield } from "@/components/ui/icons";
+import { Button, LinkButton } from "@/components/ui/button";
+import {
+  IconArrowRight,
+  IconCart,
+  IconCheck,
+  IconShield,
+  IconTruck,
+  IconLeaf,
+} from "@/components/ui/icons";
 import { useCart } from "@/lib/cart";
-import { useAuth } from "@/lib/auth";
 import { cn, formatCurrency } from "@/lib/utils";
-import { BRANDS_BY_SLUG } from "@/lib/brands";
 import type { Product } from "@/lib/products";
+import type { CatalogItem } from "@/lib/catalog";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
-export function ProductDetail({ product }: { product: Product }) {
-  const [variantId, setVariantId] = useState(product.variants[0].id);
-  const [galleryIndex, setGalleryIndex] = useState(0);
-  const { addItem, pricingMode, setPricingMode } = useCart();
-  const { user } = useAuth();
+type DetailProps =
+  | { mode: "product"; product: Product }
+  | { mode: "catalog"; item: CatalogItem };
 
-  const variant = product.variants.find((v) => v.id === variantId)!;
-  const brand = BRANDS_BY_SLUG[product.brand];
-  const isApproved = user?.role === "wholesale" && user.approved;
-  const images = [product.image, ...(product.gallery ?? [])];
-  const savings = variant.retailPrice - variant.wholesalePrice;
+export function ProductDetail(props: DetailProps) {
+  const isProduct = props.mode === "product";
+  const name = isProduct ? props.product.name : props.item.name;
+  const image = isProduct ? props.product.image : props.item.image;
+  const shortDescription = isProduct
+    ? props.product.shortDescription
+    : props.item.shortDescription;
+  const description = isProduct ? props.product.description : props.item.description;
+  const origin = isProduct ? props.product.origin : props.item.origin;
+  const tastingNotes = isProduct
+    ? props.product.tastingNotes
+    : props.item.tastingNotes;
+
+  const variants = useMemo(() => {
+    if (isProduct) return props.product.variants;
+    const item = props.item;
+    return [
+      {
+        id: `${item.slug}-default`,
+        label: item.size,
+        size: item.size,
+        retailPrice: item.retailPrice,
+        wholesalePrice: item.wholesalePrice,
+        inStock: item.inStock,
+      },
+    ];
+  }, [props, isProduct]);
+
+  const slug = isProduct ? props.product.slug : props.item.slug;
+  const category = useMemo(() => {
+    if (isProduct) return props.product.category;
+    return "Mocha Wholesale";
+  }, [props, isProduct]);
 
   return (
-    <div className="grid gap-12 lg:grid-cols-2">
-      <div>
-        <div className="relative aspect-square overflow-hidden rounded-3xl bg-coffee-100 smooth-shadow">
-          <Image
-            src={images[galleryIndex]}
-            alt={product.name}
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-        </div>
-        {images.length > 1 && (
-          <div className="mt-4 flex gap-3 overflow-x-auto no-scrollbar">
-            {images.map((src, i) => (
-              <button
-                key={src + i}
-                type="button"
-                onClick={() => setGalleryIndex(i)}
-                className={cn(
-                  "relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 bg-coffee-100 transition",
-                  i === galleryIndex
-                    ? "border-coffee-800"
-                    : "border-transparent hover:border-coffee-300"
-                )}
-              >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  sizes="80px"
-                  className="object-cover"
-                />
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-coffee-600">
-          {brand.name}
-        </p>
-        <h1 className="mt-2 font-display text-3xl font-bold text-coffee-900 sm:text-4xl">
-          {product.name}
-        </h1>
-        <p className="mt-3 text-coffee-700">{product.shortDescription}</p>
+    <DetailBody
+      slug={slug}
+      name={name}
+      image={image}
+      shortDescription={shortDescription}
+      description={description}
+      origin={origin}
+      tastingNotes={tastingNotes}
+      category={category}
+      variants={variants}
+    />
+  );
+}
 
-        <div className="mt-6 flex flex-wrap items-center gap-3 rounded-2xl border border-coffee-200 bg-white p-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-coffee-600">
-            Pricing
-          </span>
-          <div className="inline-flex rounded-full bg-coffee-100 p-1">
-            <button
-              type="button"
-              onClick={() => setPricingMode("retail")}
-              className={cn(
-                "rounded-full px-3 py-1 text-xs font-semibold transition",
-                pricingMode === "retail"
-                  ? "bg-coffee-800 text-coffee-50"
-                  : "text-coffee-700"
-              )}
-            >
-              Retail
-            </button>
-            <button
-              type="button"
-              onClick={() => isApproved && setPricingMode("wholesale")}
-              className={cn(
-                "rounded-full px-3 py-1 text-xs font-semibold transition",
-                pricingMode === "wholesale"
-                  ? "bg-accent text-coffee-900"
-                  : "text-coffee-700",
-                !isApproved && "cursor-not-allowed opacity-60"
-              )}
-              title={
-                isApproved
-                  ? undefined
-                  : "Apply for a wholesale account to unlock member pricing"
-              }
-            >
-              Wholesale
-            </button>
-          </div>
-          {!isApproved && (
-            <span className="ml-1 text-xs text-coffee-600">
-              <a href="/wholesale" className="font-semibold text-coffee-800 underline">
-                Apply
-              </a>{" "}
-              for a wholesale account to unlock pricing.
-            </span>
-          )}
-        </div>
+function DetailBody({
+  slug,
+  name,
+  image,
+  shortDescription,
+  description,
+  origin,
+  tastingNotes,
+  category,
+  variants,
+}: {
+  slug: string;
+  name: string;
+  image: string;
+  shortDescription: string;
+  description: string;
+  origin?: string;
+  tastingNotes?: string[];
+  category: string;
+  variants: {
+    id: string;
+    label: string;
+    size: string;
+    retailPrice: number;
+    wholesalePrice: number;
+    inStock: number;
+  }[];
+}) {
+  const [variantId, setVariantId] = useState(variants[0].id);
+  const [qty, setQty] = useState(1);
+  const [zoom, setZoom] = useState(false);
+  const { addItem, pricingMode } = useCart();
 
-        <div className="mt-6 flex items-baseline gap-3">
-          <p className="font-display text-4xl font-bold text-coffee-900">
-            {formatCurrency(
-              pricingMode === "wholesale"
-                ? variant.wholesalePrice
-                : variant.retailPrice
+  const variant = variants.find((v) => v.id === variantId)!;
+  const unitPrice =
+    pricingMode === "wholesale"
+      ? variant.wholesalePrice
+      : variant.retailPrice;
+
+  return (
+    <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
+      {/* ── Left: image gallery ── */}
+      <ScrollReveal direction="left" duration={700}>
+        <div className="lg:sticky lg:top-32">
+          <div
+            className={cn(
+              "group relative aspect-square overflow-hidden rounded-2xl border border-gray-200 bg-white transition-shadow duration-500",
+              zoom ? "shadow-2xl ring-2 ring-[#c2185b]" : "hover:shadow-xl"
             )}
-          </p>
-          {pricingMode === "wholesale" && (
-            <p className="text-sm text-coffee-500 line-through">
-              {formatCurrency(variant.retailPrice)}
-            </p>
-          )}
-          {pricingMode === "retail" && isApproved && (
-            <p className="text-sm text-coffee-500">
-              Member price {formatCurrency(variant.wholesalePrice)} · save{" "}
-              {formatCurrency(savings)}
-            </p>
-          )}
-        </div>
-        <p className="mt-1 text-xs text-coffee-500">{variant.size}</p>
+            onMouseEnter={() => setZoom(true)}
+            onMouseLeave={() => setZoom(false)}
+          >
+            <Image
+              src={image}
+              alt={name}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className={cn(
+                "object-contain p-8 transition-transform duration-700 ease-out",
+                zoom && "scale-110"
+              )}
+            />
+            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl" />
+          </div>
 
-        <div className="mt-6">
-          <p className="text-xs font-semibold uppercase tracking-wider text-coffee-700">
-            Choose size
-          </p>
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
-            {product.variants.map((v) => (
-              <button
-                key={v.id}
-                type="button"
-                onClick={() => setVariantId(v.id)}
-                className={cn(
-                  "flex items-start justify-between gap-2 rounded-xl border p-3 text-left transition",
-                  v.id === variantId
-                    ? "border-coffee-800 bg-coffee-50 ring-1 ring-coffee-800"
-                    : "border-coffee-200 bg-white hover:border-coffee-400"
-                )}
-              >
-                <div>
-                  <p className="text-sm font-semibold text-coffee-900">
-                    {v.label}
-                  </p>
-                  <p className="text-xs text-coffee-600">{v.size}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-bold text-coffee-900">
-                    {formatCurrency(
-                      pricingMode === "wholesale"
-                        ? v.wholesalePrice
-                        : v.retailPrice
-                    )}
-                  </p>
-                  {pricingMode === "retail" && isApproved && (
-                    <p className="text-[10px] text-coffee-500 line-through">
-                      {formatCurrency(v.wholesalePrice)}
-                    </p>
-                  )}
-                  <p className="mt-1 text-[10px] uppercase tracking-wider text-coffee-500">
-                    {v.inStock > 100
-                      ? "In stock"
-                      : v.inStock > 0
-                        ? `${v.inStock} left`
-                        : "Backorder"}
-                  </p>
-                </div>
-              </button>
-            ))}
+          <div className="mt-4 flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#2d6a2d]/10">
+              <IconCheck className="h-4 w-4 text-[#2d6a2d]" />
+            </span>
+            <span className="font-medium">
+              In stock · Same-week shipping from Dearborn, MI
+            </span>
           </div>
         </div>
+      </ScrollReveal>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button
-            size="lg"
-            onClick={() =>
-              addItem({
-                product: {
-                  slug: product.slug,
-                  name: product.name,
-                  brand: brand.name,
-                  image: product.image,
-                },
-                variant,
-                pricingMode,
-              })
-            }
-          >
-            <IconCart className="h-4 w-4" />
-            Add to cart
-          </Button>
-          <Button variant="outline" size="lg">
-            <IconShield className="h-4 w-4" />
-            Request standing order
-          </Button>
-        </div>
+      {/* ── Right: details ── */}
+      <div>
+        <ScrollReveal direction="right" duration={700}>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2d6a2d]">
+            {category || "Mocha Wholesale"}
+          </p>
+          <h1 className="mt-2 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">
+            {name}
+          </h1>
+          <p className="mt-3 text-base leading-relaxed text-gray-700">
+            {shortDescription}
+          </p>
+        </ScrollReveal>
 
-        <div className="mt-10 grid gap-6 border-t border-coffee-200 pt-8 text-sm">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-coffee-700">
+        {/* Pricing block */}
+        <ScrollReveal direction="up" delay={120} duration={700}>
+          <div className="mt-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+            <div className="flex flex-wrap items-baseline gap-3 p-5">
+              <p className="text-4xl font-extrabold text-gray-900">
+                {formatCurrency(unitPrice)}
+              </p>
+              <span className="text-sm font-medium text-gray-600">
+                per {variant.size}
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-gray-100 bg-gray-50 px-5 py-3 text-xs text-gray-600">
+              <span>{variant.size}</span>
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold",
+                  variant.inStock > 100
+                    ? "bg-[#2d6a2d]/10 text-[#2d6a2d]"
+                    : variant.inStock > 0
+                      ? "bg-amber-100 text-amber-800"
+                      : "bg-red-100 text-red-700"
+                )}
+              >
+                <IconCheck className="h-3 w-3" />
+                {variant.inStock > 100
+                  ? "In stock"
+                  : variant.inStock > 0
+                    ? `Only ${variant.inStock} left`
+                    : "Backorder"}
+              </span>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Variants */}
+        {variants.length > 1 && (
+          <ScrollReveal direction="up" delay={180} duration={700}>
+            <div className="mt-6">
+              <p className="text-xs font-semibold uppercase tracking-wider text-gray-700">
+                Choose size
+              </p>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {variants.map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => setVariantId(v.id)}
+                    className={cn(
+                      "flex items-start justify-between gap-2 rounded-xl border p-3 text-left transition-all duration-200",
+                      v.id === variantId
+                        ? "border-[#c2185b] bg-[#c2185b]/5 ring-1 ring-[#c2185b] scale-[1.01]"
+                        : "border-gray-200 bg-white hover:border-gray-400 hover:scale-[1.01]"
+                    )}
+                  >
+                    <div>
+                      <p className="text-sm font-semibold text-gray-900">
+                        {v.label}
+                      </p>
+                      <p className="text-xs text-gray-600">{v.size}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-gray-900">
+                        {formatCurrency(
+                          pricingMode === "wholesale"
+                            ? v.wholesalePrice
+                            : v.retailPrice
+                        )}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
+
+        {/* Quantity + Add to cart */}
+        <ScrollReveal direction="up" delay={240} duration={700}>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="flex items-center overflow-hidden rounded-lg border border-gray-200 bg-white">
+              <button
+                type="button"
+                onClick={() => setQty((q) => Math.max(1, q - 1))}
+                className="h-11 w-11 text-lg font-bold text-gray-700 transition hover:bg-gray-100 active:scale-95"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+              <span className="w-10 text-center text-sm font-bold text-gray-900">
+                {qty}
+              </span>
+              <button
+                type="button"
+                onClick={() => setQty((q) => Math.min(99, q + 1))}
+                className="h-11 w-11 text-lg font-bold text-gray-700 transition hover:bg-gray-100 active:scale-95"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+
+            <Button
+              size="lg"
+              onClick={() =>
+                addItem({
+                  product: {
+                    slug,
+                    name,
+                    brand: "Mocha Wholesale",
+                    image,
+                  },
+                  variant,
+                  pricingMode,
+                  quantity: qty,
+                })
+              }
+              className="flex-1 sm:flex-none"
+            >
+              <IconCart className="h-4 w-4" />
+              Add to cart · {formatCurrency(unitPrice * qty)}
+            </Button>
+
+            <LinkButton href="/wholesale" variant="outline" size="lg">
+              <IconShield className="h-4 w-4" />
+              Apply for wholesale
+            </LinkButton>
+          </div>
+        </ScrollReveal>
+
+        {/* Tasting + Origin pills */}
+        {(origin || (tastingNotes && tastingNotes.length > 0)) && (
+          <ScrollReveal direction="up" delay={300} duration={700}>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {origin && (
+                <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Origin
+                  </p>
+                  <p className="mt-2 text-base font-semibold text-gray-900">
+                    {origin}
+                  </p>
+                </div>
+              )}
+              {tastingNotes && tastingNotes.length > 0 && (
+                <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Tasting notes
+                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-1.5">
+                    {tastingNotes.map((n) => (
+                      <li
+                        key={n}
+                        className="rounded-full bg-[#c2185b]/10 px-3 py-1 text-xs font-semibold text-[#c2185b] transition-colors hover:bg-[#c2185b] hover:text-white"
+                      >
+                        {n}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </ScrollReveal>
+        )}
+
+        {/* Description */}
+        <ScrollReveal direction="up" delay={360} duration={700}>
+          <div className="mt-8 border-t border-gray-200 pt-8">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-700">
               Description
             </p>
-            <p className="mt-2 leading-relaxed text-coffee-800">
-              {product.description}
+            <p className="mt-2 text-base leading-relaxed text-gray-800">
+              {description}
             </p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {product.origin && (
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-coffee-700">
-                  Origin
-                </p>
-                <p className="mt-1 text-coffee-900">{product.origin}</p>
-              </div>
-            )}
-            {product.roastLevel && (
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-coffee-700">
-                  Roast level
-                </p>
-                <p className="mt-1 text-coffee-900">{product.roastLevel}</p>
-              </div>
-            )}
-            {product.tastingNotes && product.tastingNotes.length > 0 && (
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-coffee-700">
-                  Tasting notes
-                </p>
-                <ul className="mt-2 flex flex-wrap gap-1.5">
-                  {product.tastingNotes.map((n) => (
-                    <li
-                      key={n}
-                      className="rounded-full bg-coffee-100 px-3 py-1 text-xs font-semibold text-coffee-800"
-                    >
-                      {n}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {product.ingredients && (
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-coffee-700">
-                  Ingredients
-                </p>
-                <p className="mt-1 text-coffee-900">{product.ingredients}</p>
-              </div>
-            )}
+        </ScrollReveal>
+
+        {/* Trust badges */}
+        <ScrollReveal direction="up" delay={420} duration={700}>
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <Benefit
+              icon={<IconTruck className="h-5 w-5" />}
+              title="Same-week delivery"
+              body="Ships from our Dearborn facility within 1 business day."
+            />
+            <Benefit
+              icon={<IconLeaf className="h-5 w-5" />}
+              title="Bulk discounts"
+              body="Ask about volume tiers and standing-order pricing."
+            />
+            <Benefit
+              icon={<IconShield className="h-5 w-5" />}
+              title="Quality guarantee"
+              body="We replace anything that doesn't meet your quality bar."
+            />
           </div>
-          <div className="rounded-xl border border-coffee-200 bg-coffee-50 p-4 text-xs text-coffee-700">
-            <p className="flex items-center gap-2 font-semibold text-coffee-900">
-              <IconCheck className="h-4 w-4 text-success" />
-              Wholesale terms
-            </p>
-            <p className="mt-1">
-              {isApproved
-                ? "Your wholesale account is active — member pricing is applied automatically."
-                : "Approved wholesale accounts see this product at member pricing and can request standing orders. Apply with your EIN to get started."}
-            </p>
-          </div>
-        </div>
+        </ScrollReveal>
+
+        {/* Wholesale CTA */}
+        <ScrollReveal direction="up" delay={480} duration={700}>
+          <LinkButton
+            href="/wholesale"
+            variant="primary"
+            size="lg"
+            className="mt-8 w-full"
+          >
+            <IconShield className="h-4 w-4" />
+            Become a wholesale partner
+            <IconArrowRight className="h-4 w-4" />
+          </LinkButton>
+        </ScrollReveal>
       </div>
+    </div>
+  );
+}
+
+function Benefit({
+  icon,
+  title,
+  body,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div className="group rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+      <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#c2185b]/10 text-[#c2185b] transition-colors duration-300 group-hover:bg-[#c2185b] group-hover:text-white">
+        {icon}
+      </div>
+      <p className="mt-3 text-sm font-bold text-gray-900">{title}</p>
+      <p className="mt-1 text-xs leading-relaxed text-gray-700">{body}</p>
     </div>
   );
 }

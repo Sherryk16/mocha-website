@@ -32,17 +32,17 @@ const BENEFITS = [
 export default function WholesalePage() {
   return (
     <>
-      <section className="bg-coffee-100/40">
+      <section className="border-b border-gray-200 bg-white">
         <Container className="py-12 sm:py-16">
           <Eyebrow>Wholesale application</Eyebrow>
           <Heading className="mt-2">Apply for a wholesale account.</Heading>
-          <p className="mt-3 max-w-2xl text-coffee-700">
+          <p className="mt-3 max-w-2xl text-gray-700">
             Mocha Wholesale serves licensed businesses — cafés, restaurants,
             bakeries, hotels, offices and grocery. Apply with your EIN to
             unlock member pricing, standing orders and same-week delivery.
           </p>
-          <nav className="mt-3 text-xs text-coffee-600">
-            <Link href="/" className="hover:text-coffee-900">
+          <nav className="mt-3 text-xs text-gray-500">
+            <Link href="/" className="hover:text-gray-900">
               Home
             </Link>
             <span className="mx-1.5">/</span>
@@ -52,26 +52,29 @@ export default function WholesalePage() {
       </section>
       <Container className="grid gap-12 py-12 lg:grid-cols-[1fr_2fr]">
         <aside className="space-y-5">
-          {BENEFITS.map((b) => (
-            <div
-              key={b.title}
-              className="rounded-2xl border border-coffee-200 bg-white p-5"
-            >
-              <b.icon className="h-6 w-6 text-coffee-700" />
-              <h3 className="mt-3 font-display text-lg font-semibold text-coffee-900">
-                {b.title}
-              </h3>
-              <p className="mt-1 text-sm text-coffee-700">{b.body}</p>
-            </div>
-          ))}
-          <div className="rounded-2xl border border-coffee-200 bg-coffee-100/60 p-5 text-sm text-coffee-700">
-            <p className="font-semibold text-coffee-900">Already approved?</p>
+          {BENEFITS.map((b) => {
+            const Icon = b.icon;
+            return (
+              <div
+                key={b.title}
+                className="rounded-2xl border border-gray-200 bg-white p-5"
+              >
+                <Icon className="h-6 w-6 text-[#2d6a2d]" />
+                <h3 className="mt-3 text-lg font-semibold text-gray-900">
+                  {b.title}
+                </h3>
+                <p className="mt-1 text-sm text-gray-600">{b.body}</p>
+              </div>
+            );
+          })}
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-sm text-gray-700">
+            <p className="font-semibold text-gray-900">Already approved?</p>
             <p className="mt-1">
               Sign in and we'll apply your member pricing automatically.
             </p>
             <Link
               href="/account/login?return=/wholesale"
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-coffee-800 px-4 py-2 text-xs font-semibold text-coffee-50 hover:bg-coffee-900"
+              className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#c2185b] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#9c0e4a]"
             >
               Sign in →
             </Link>

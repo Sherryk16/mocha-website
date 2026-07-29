@@ -52,19 +52,19 @@ export function WholesaleApplicationForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-coffee-200 bg-white p-10 text-center smooth-shadow">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-success text-white">
+      <div className="rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#2d6a2d] text-white">
           <IconCheck className="h-7 w-7" />
         </span>
-        <h2 className="mt-5 font-display text-3xl font-bold text-coffee-900">
+        <h2 className="mt-5 text-3xl font-bold text-gray-900">
           Application received.
         </h2>
-        <p className="mx-auto mt-2 max-w-md text-sm text-coffee-700">
+        <p className="mx-auto mt-2 max-w-md text-sm text-gray-600">
           Thanks! Our wholesale desk will verify your EIN and respond within
           one business day. You'll see member pricing as soon as your account
           is approved.
         </p>
-        <p className="mt-3 text-xs text-coffee-500">
+        <p className="mt-3 text-xs text-gray-500">
           Submitted under{" "}
           <span className="font-semibold">{user?.email ?? "your account"}</span>.
         </p>
@@ -77,11 +77,11 @@ export function WholesaleApplicationForm() {
       <Stepper step={step} />
 
       {step === 1 && (
-        <section className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
-          <h2 className="font-display text-xl font-bold text-coffee-900">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">
             Tell us about your business
           </h2>
-          <p className="mt-1 text-sm text-coffee-600">
+          <p className="mt-1 text-sm text-gray-600">
             We'll use this to verify your standing as a licensed business.
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -166,16 +166,16 @@ export function WholesaleApplicationForm() {
       )}
 
       {step === 2 && (
-        <section className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-coffee-100 text-coffee-800">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#2d6a2d]/10 text-[#2d6a2d]">
               <IconShield className="h-5 w-5" />
             </span>
             <div>
-              <h2 className="font-display text-xl font-bold text-coffee-900">
+              <h2 className="text-xl font-bold text-gray-900">
                 Verify your EIN
               </h2>
-              <p className="text-sm text-coffee-600">
+              <p className="text-sm text-gray-600">
                 Federal Employer Identification Number. We'll verify against
                 IRS records.
               </p>
@@ -184,7 +184,7 @@ export function WholesaleApplicationForm() {
 
           <div className="mt-6">
             <label htmlFor="ein" className="block">
-              <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-coffee-700">
+              <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-gray-700">
                 EIN (9 digits)
               </span>
               <input
@@ -197,20 +197,18 @@ export function WholesaleApplicationForm() {
                 placeholder="38-1234567"
                 inputMode="numeric"
                 className={cn(
-                  "block w-full rounded-md border border-coffee-200 bg-white px-3.5 py-2.5 font-mono text-base text-coffee-900 placeholder:text-coffee-400 focus:border-coffee-500 focus:outline-none focus:ring-1 focus:ring-coffee-500",
+                  "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 font-mono text-base text-gray-900 placeholder:text-gray-400 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
                   einInput.length > 0 &&
                     !einValid &&
-                    "border-danger focus:border-danger focus:ring-danger"
+                    "border-pink-500 focus:border-pink-500 focus:ring-pink-500"
                 )}
               />
               <span
                 className={cn(
                   "mt-1 block text-xs",
-                  einInput.length === 0 && "text-coffee-500",
-                  einValid && "text-success",
-                  einInput.length > 0 &&
-                    !einValid &&
-                    "text-danger"
+                  einInput.length === 0 && "text-gray-500",
+                  einValid && "text-[#2d6a2d]",
+                  einInput.length > 0 && !einValid && "text-red-600"
                 )}
               >
                 {einInput.length === 0
@@ -220,8 +218,8 @@ export function WholesaleApplicationForm() {
                     : "Invalid EIN. Check the 2-digit prefix and length."}
               </span>
             </label>
-            <div className="mt-4 rounded-xl border border-coffee-200 bg-coffee-50 p-4 text-xs text-coffee-700">
-              <p className="font-semibold text-coffee-900">
+            <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4 text-xs text-gray-700">
+              <p className="font-semibold text-gray-900">
                 What we'll do with your EIN
               </p>
               <p className="mt-1">
@@ -262,11 +260,9 @@ export function WholesaleApplicationForm() {
       )}
 
       {step === 3 && (
-        <section className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
-          <h2 className="font-display text-xl font-bold text-coffee-900">
-            Review &amp; submit
-          </h2>
-          <p className="mt-1 text-sm text-coffee-600">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">Review &amp; submit</h2>
+          <p className="mt-1 text-sm text-gray-600">
             One last check before we send this to our wholesale desk.
           </p>
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
@@ -276,12 +272,12 @@ export function WholesaleApplicationForm() {
               value={user?.email ?? "—"}
             />
           </div>
-          <label className="mt-6 flex items-start gap-3 text-xs text-coffee-700">
+          <label className="mt-6 flex items-start gap-3 text-xs text-gray-700">
             <input
               type="checkbox"
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-coffee-300 text-coffee-800 focus:ring-coffee-500"
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 accent-[#c2185b] focus:ring-[#c2185b]"
               required
             />
             <span>
@@ -316,10 +312,10 @@ export function WholesaleApplicationForm() {
 function ReviewField({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wider text-coffee-500">
+      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
         {label}
       </p>
-      <p className="mt-1 font-semibold text-coffee-900">{value}</p>
+      <p className="mt-1 font-semibold text-gray-900">{value}</p>
     </div>
   );
 }
@@ -336,10 +332,10 @@ function Stepper({ step }: { step: 1 | 2 | 3 }) {
         <li key={s.n} className="flex items-center gap-3">
           <span
             className={cn(
-              "inline-flex h-8 w-8 items-center justify-center rounded-full border-2 font-bold",
+              "inline-flex h-8 w-8 items-center justify-center rounded-full border-2 font-bold transition",
               step >= s.n
-                ? "border-coffee-800 bg-coffee-800 text-coffee-50"
-                : "border-coffee-300 bg-white text-coffee-500"
+                ? "border-[#c2185b] bg-[#c2185b] text-white"
+                : "border-gray-300 bg-white text-gray-400"
             )}
           >
             {s.n}
@@ -347,7 +343,7 @@ function Stepper({ step }: { step: 1 | 2 | 3 }) {
           <span
             className={cn(
               "font-semibold",
-              step >= s.n ? "text-coffee-900" : "text-coffee-500"
+              step >= s.n ? "text-gray-900" : "text-gray-400"
             )}
           >
             {s.label}
@@ -355,8 +351,8 @@ function Stepper({ step }: { step: 1 | 2 | 3 }) {
           {i < steps.length - 1 && (
             <span
               className={cn(
-                "ml-2 h-px w-10 sm:w-16",
-                step > s.n ? "bg-coffee-800" : "bg-coffee-300"
+                "ml-2 h-px w-10 transition sm:w-16",
+                step > s.n ? "bg-[#c2185b]" : "bg-gray-300"
               )}
             />
           )}

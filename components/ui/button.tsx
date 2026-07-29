@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
@@ -8,18 +9,18 @@ type Variant = "primary" | "secondary" | "ghost" | "outline" | "danger";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-wide transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c2185b] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-coffee-800 text-coffee-50 hover:bg-coffee-900 shadow-sm hover:shadow",
+    "bg-[#c2185b] text-white hover:bg-[#9c0e4a] shadow-sm hover:shadow-md",
   secondary:
-    "bg-accent text-coffee-900 hover:bg-accent-soft",
+    "bg-white text-gray-900 border border-gray-200 hover:bg-gray-50",
   ghost:
-    "bg-transparent text-coffee-800 hover:bg-coffee-100",
+    "bg-transparent text-gray-900 hover:bg-gray-100",
   outline:
-    "border border-coffee-300 bg-transparent text-coffee-800 hover:bg-coffee-100",
-  danger: "bg-danger text-white hover:opacity-90",
+    "border border-gray-300 bg-transparent text-gray-900 hover:bg-gray-100",
+  danger: "bg-red-700 text-white hover:opacity-90",
 };
 
 const sizes: Record<Size, string> = {
@@ -28,27 +29,74 @@ const sizes: Record<Size, string> = {
   lg: "h-12 px-7 text-sm",
 };
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type CommonProps = {
   variant?: Variant;
   size?: Size;
   fullWidth?: boolean;
+  className?: string;
+  children?: React.ReactNode;
 };
 
-export const Button = forwardRef<HTMLButtonElement, Props>(function Button(
-  { variant = "primary", size = "md", fullWidth, className, ...rest },
+type ButtonProps = CommonProps &
+  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonProps>;
+
+type LinkButtonProps = CommonProps & {
+  href: string;
+  prefetch?: boolean;
+};
+
+function classesForCommon({
+  variant = "primary",
+  size = "md",
+  fullWidth,
+  className,
+}: CommonProps) {
+  return cn(
+    base,
+    variants[variant],
+    sizes[size],
+    fullWidth && "w-full",
+    className
+  );
+}
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  props,
   ref
 ) {
+  const { className, variant, size, fullWidth, children, ...rest } = props;
   return (
     <button
       ref={ref}
-      className={cn(
-        base,
-        variants[variant],
-        sizes[size],
-        fullWidth && "w-full",
-        className
-      )}
+      className={classesForCommon({ variant, size, fullWidth, className })}
       {...rest}
-    />
+    >
+      {children}
+    </button>
   );
 });
+
+export function LinkButton({
+  href,
+  prefetch,
+  variant,
+  size,
+  fullWidth,
+  className,
+  children,
+}: LinkButtonProps) {
+  return (
+    <Link
+      href={href}
+      prefetch={prefetch}
+      className={classesForCommon({
+        variant,
+        size,
+        fullWidth,
+        className,
+      })}
+    >
+      {children}
+    </Link>
+  );
+}

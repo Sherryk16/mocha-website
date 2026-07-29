@@ -16,7 +16,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <label htmlFor={inputId} className="block">
       {label && (
-        <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-coffee-700">
+        <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-gray-700">
           {label}
         </span>
       )}
@@ -24,17 +24,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         ref={ref}
         id={inputId}
         className={cn(
-          "block w-full rounded-md border border-coffee-200 bg-white px-3.5 py-2.5 text-sm text-coffee-900 placeholder:text-coffee-400 focus:border-coffee-500 focus:outline-none focus:ring-1 focus:ring-coffee-500",
-          error && "border-danger focus:border-danger focus:ring-danger",
+          "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
+          error &&
+            "border-pink-500 focus:border-pink-500 focus:ring-pink-500",
           className
         )}
         {...rest}
       />
       {hint && !error && (
-        <span className="mt-1 block text-xs text-coffee-500">{hint}</span>
+        <span className="mt-1 block text-xs text-gray-500">{hint}</span>
       )}
       {error && (
-        <span className="mt-1 block text-xs font-medium text-danger">{error}</span>
+        <span className="mt-1 block text-xs font-medium text-red-600">
+          {error}
+        </span>
       )}
     </label>
   );
@@ -52,7 +55,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <label htmlFor={inputId} className="block">
         {label && (
-          <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-coffee-700">
+          <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-gray-700">
             {label}
           </span>
         )}
@@ -60,17 +63,20 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            "block min-h-[120px] w-full rounded-md border border-coffee-200 bg-white px-3.5 py-2.5 text-sm text-coffee-900 placeholder:text-coffee-400 focus:border-coffee-500 focus:outline-none focus:ring-1 focus:ring-coffee-500",
-            error && "border-danger focus:border-danger focus:ring-danger",
+            "block min-h-[120px] w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
+            error &&
+              "border-pink-500 focus:border-pink-500 focus:ring-pink-500",
             className
           )}
           {...rest}
         />
         {hint && !error && (
-          <span className="mt-1 block text-xs text-coffee-500">{hint}</span>
+          <span className="mt-1 block text-xs text-gray-500">{hint}</span>
         )}
         {error && (
-          <span className="mt-1 block text-xs font-medium text-danger">{error}</span>
+          <span className="mt-1 block text-xs font-medium text-red-600">
+            {error}
+          </span>
         )}
       </label>
     );
@@ -92,7 +98,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
   return (
     <label htmlFor={inputId} className="block">
       {label && (
-        <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-coffee-700">
+        <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-gray-700">
           {label}
         </span>
       )}
@@ -100,8 +106,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         ref={ref}
         id={inputId}
         className={cn(
-          "block w-full rounded-md border border-coffee-200 bg-white px-3.5 py-2.5 text-sm text-coffee-900 focus:border-coffee-500 focus:outline-none focus:ring-1 focus:ring-coffee-500",
-          error && "border-danger focus:border-danger focus:ring-danger",
+          "block w-full rounded-md border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 focus:border-[#c2185b] focus:outline-none focus:ring-1 focus:ring-[#c2185b]",
+          error &&
+            "border-pink-500 focus:border-pink-500 focus:ring-pink-500",
           className
         )}
         {...rest}
@@ -113,10 +120,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         ))}
       </select>
       {hint && !error && (
-        <span className="mt-1 block text-xs text-coffee-500">{hint}</span>
+        <span className="mt-1 block text-xs text-gray-500">{hint}</span>
       )}
       {error && (
-        <span className="mt-1 block text-xs font-medium text-danger">{error}</span>
+        <span className="mt-1 block text-xs font-medium text-red-600">
+          {error}
+        </span>
       )}
     </label>
   );

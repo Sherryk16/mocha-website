@@ -38,7 +38,7 @@ export function Heading({
   return (
     <As
       className={cn(
-        "font-display text-3xl font-semibold tracking-tight text-coffee-900 sm:text-4xl",
+        "text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl",
         className
       )}
     >
@@ -57,7 +57,7 @@ export function Eyebrow({
   return (
     <span
       className={cn(
-        "text-xs font-semibold uppercase tracking-[0.18em] text-coffee-600",
+        "text-xs font-semibold uppercase tracking-[0.18em] text-[#c2185b]",
         className
       )}
     >

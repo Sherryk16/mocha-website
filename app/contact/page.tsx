@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-coffee-100/40">
+      <section className="border-b border-gray-200 bg-white">
         <Container className="py-12 sm:py-16">
           <Eyebrow>Contact</Eyebrow>
           <Heading className="mt-2">Talk to a real person.</Heading>
-          <p className="mt-3 max-w-xl text-coffee-700">
+          <p className="mt-3 max-w-xl text-gray-700">
             Whether you're an existing wholesale customer, applying for an
             account, or just curious about a product — our desk is open Mon to
             Fri, 8am to 6pm ET.
@@ -25,7 +25,7 @@ export default function ContactPage() {
         </Container>
       </section>
       <Container className="py-12 sm:py-16">
-        <div className="grid gap-10 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3">
           <ContactBlock
             icon={IconPhone}
             label="Phone"
@@ -65,13 +65,13 @@ function ContactBlock({
   return (
     <a
       href={href}
-      className="group flex flex-col rounded-2xl border border-coffee-200 bg-white p-6 transition hover:border-coffee-400"
+      className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
     >
-      <Icon className="h-6 w-6 text-coffee-700" />
-      <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-coffee-500">
+      <Icon className="h-6 w-6 text-[#c2185b]" />
+      <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
         {label}
       </p>
-      <p className="mt-1 font-display text-lg font-semibold text-coffee-900 group-hover:underline">
+      <p className="mt-1 text-lg font-semibold text-gray-900 group-hover:text-[#c2185b]">
         {value}
       </p>
     </a>

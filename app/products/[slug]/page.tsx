@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { Container, Eyebrow } from "@/components/ui/layout";
+import { Container } from "@/components/ui/layout";
 import { PricingModeBanner } from "@/components/layout/pricing-mode-banner";
 import { ProductDetail } from "@/components/products/product-detail";
 import { ProductCard } from "@/components/products/product-card";
@@ -12,10 +12,16 @@ import {
   getProductBySlug,
   getRelatedProducts,
 } from "@/lib/products";
-import { BRANDS_BY_SLUG } from "@/lib/brands";
+import {
+  CATALOG_ITEMS,
+  getCatalogItem,
+} from "@/lib/catalog";
 
 export async function generateStaticParams() {
-  return PRODUCTS.map((p) => ({ slug: p.slug }));
+  return [
+    ...PRODUCTS.map((p) => ({ slug: p.slug })),
+    ...CATALOG_ITEMS.map((c) => ({ slug: c.slug })),
+  ];
 }
 
 export async function generateMetadata({
@@ -25,16 +31,30 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-  if (!product) return { title: "Product" };
-  return {
-    title: product.name,
-    description: product.shortDescription,
-    openGraph: {
+  if (product) {
+    return {
       title: product.name,
       description: product.shortDescription,
-      images: [{ url: product.image }],
-    },
-  };
+      openGraph: {
+        title: product.name,
+        description: product.shortDescription,
+        images: [{ url: product.image }],
+      },
+    };
+  }
+  const item = getCatalogItem(slug);
+  if (item) {
+    return {
+      title: item.name,
+      description: item.shortDescription,
+      openGraph: {
+        title: item.name,
+        description: item.shortDescription,
+        images: [{ url: item.image }],
+      },
+    };
+  }
+  return { title: "Product" };
 }
 
 export default async function ProductPage({
@@ -44,63 +64,128 @@ export default async function ProductPage({
 }) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-  if (!product) notFound();
+  const catalog = getCatalogItem(slug);
+  if (!product && !catalog) notFound();
 
-  const brand = BRANDS_BY_SLUG[product.brand];
-  const category = CATEGORIES.find((c) => c.slug === product.category);
-  const related = getRelatedProducts(product);
+  const breadcrumbLabel = product?.category ?? "";
+  const breadcrumbLabelText =
+    CATEGORIES.find((c) => c.slug === breadcrumbLabel)?.label ?? "";
+
+  const related = product
+    ? getRelatedProducts(product).slice(0, 4)
+    : catalog
+      ? CATALOG_ITEMS.filter(
+          (c) => c.slug !== catalog.slug && c.group === catalog.group
+        )
+          .concat(
+            CATALOG_ITEMS.filter(
+              (c) => c.slug !== catalog.slug && c.group !== catalog.group
+            )
+          )
+          .slice(0, 4)
+      : [];
+
+  const groupLabels: Record<string, string> = {
+    coffee: "Premium Coffee",
+    syrups: "Premium Syrups",
+    sauces: "Premium Sauces",
+    spreads: "Spreads",
+    "tea-and-spices": "Tea & Spices",
+    mixes: "Mixes",
+    ingredients: "Premium Ingredients",
+  };
+  const catalogGroupLabel = catalog ? groupLabels[catalog.group] : "";
+
+  const displayCategoryLabel = product
+    ? breadcrumbLabelText
+    : catalogGroupLabel;
 
   return (
     <>
-      <section className="bg-coffee-100/40">
-        <Container className="py-8">
-          <nav className="text-xs text-coffee-600">
-            <Link href="/" className="hover:text-coffee-900">
+      <section className="border-b border-gray-200 bg-white">
+        <Container className="py-6 sm:py-8">
+          <nav className="flex flex-wrap items-center gap-1.5 text-xs text-gray-500">
+            <Link href="/" className="hover:text-[#c2185b] transition-colors">
               Home
             </Link>
-            <span className="mx-1.5">/</span>
-            <Link href="/products" className="hover:text-coffee-900">
+            <span className="text-gray-300">/</span>
+            <Link
+              href="/products"
+              className="hover:text-[#c2185b] transition-colors"
+            >
               Products
             </Link>
-            <span className="mx-1.5">/</span>
-            <Link
-              href={`/products?category=${product.category}`}
-              className="hover:text-coffee-900"
-            >
-              {category?.label}
-            </Link>
-            <span className="mx-1.5">/</span>
-            <span className="text-coffee-900">{product.name}</span>
+            {displayCategoryLabel && (
+              <>
+                <span className="text-gray-300">/</span>
+                <Link
+                  href={
+                    catalog
+                      ? `/products?group=${catalog.group}`
+                      : `/products?category=${breadcrumbLabel}`
+                  }
+                  className="hover:text-[#c2185b] transition-colors"
+                >
+                  {displayCategoryLabel}
+                </Link>
+              </>
+            )}
+            <span className="text-gray-300">/</span>
+            <span className="font-semibold text-gray-900">
+              {product?.name ?? catalog?.name}
+            </span>
           </nav>
-          <p className="mt-3 text-sm text-coffee-700">
-            <Eyebrow>{brand.name}</Eyebrow>
-          </p>
         </Container>
       </section>
       <Container className="py-10 sm:py-12">
         <PricingModeBanner />
-        <div className="mt-8">
-          <ProductDetail product={product} />
+        <div className="mt-6">
+          {product ? (
+            <ProductDetail mode="product" product={product} />
+          ) : catalog ? (
+            <ProductDetail mode="catalog" item={catalog} />
+          ) : null}
         </div>
       </Container>
       {related.length > 0 && (
-        <section className="bg-coffee-100/40">
+        <section className="border-t border-gray-200 bg-white">
           <Container className="py-12 sm:py-16">
-            <div className="flex items-end justify-between">
-              <h2 className="font-display text-2xl font-bold text-coffee-900">
-                More from {category?.label}
-              </h2>
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c2185b]">
+                  You may also like
+                </p>
+                <h2 className="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl">
+                  More from {displayCategoryLabel}
+                </h2>
+              </div>
               <Link
-                href={`/products?category=${product.category}`}
-                className="text-sm font-semibold text-coffee-700 hover:text-coffee-900"
+                href={
+                  catalog
+                    ? `/products?group=${catalog.group}`
+                    : `/products?category=${breadcrumbLabel}`
+                }
+                className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition-all hover:-translate-y-0.5 hover:border-[#c2185b] hover:text-[#c2185b]"
               >
                 See all →
               </Link>
             </div>
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {related.map((p) => (
-                <ProductCard key={p.slug} product={p} />
-              ))}
+              {related.map((p) =>
+                "variants" in p ? (
+                  <ProductCard
+                    key={p.slug}
+                    kind="product"
+                    product={p as import("@/lib/products").Product}
+                  />
+                ) : (
+                  <ProductCard
+                    key={p.slug}
+                    kind="catalog"
+                    item={p as import("@/lib/catalog").CatalogItem}
+                  />
+                )
+              )}
             </div>
           </Container>
         </section>

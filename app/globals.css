@@ -1,39 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbf7f2;
-  --foreground: #1f1410;
-  --coffee-50: #faf5ef;
-  --coffee-100: #f3e9dc;
-  --coffee-200: #e6d2b6;
-  --coffee-300: #d3b387;
-  --coffee-400: #b89260;
-  --coffee-500: #8e6a3f;
-  --coffee-600: #6b4f2d;
-  --coffee-700: #4f3a22;
-  --coffee-800: #3a2a18;
-  --coffee-900: #231810;
-  --accent: #c9a368;
-  --accent-soft: #e8d4a8;
+  --background: #ffffff;
+  --foreground: #111111;
+  --accent: #c2185b;
+  --accent-soft: #f8e6ee;
   --danger: #b94a3b;
   --success: #4d7c3a;
-  --muted: #8a7560;
-  --border: #e8dccb;
+  --muted: #6b7280;
+  --border: #e5e7eb;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-coffee-50: var(--coffee-50);
-  --color-coffee-100: var(--coffee-100);
-  --color-coffee-200: var(--coffee-200);
-  --color-coffee-300: var(--coffee-300);
-  --color-coffee-400: var(--coffee-400);
-  --color-coffee-500: var(--coffee-500);
-  --color-coffee-600: var(--coffee-600);
-  --color-coffee-700: var(--coffee-700);
-  --color-coffee-800: var(--coffee-800);
-  --color-coffee-900: var(--coffee-900);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-danger: var(--danger);
@@ -42,6 +22,10 @@
   --color-border: var(--border);
   --font-sans: var(--font-inter);
   --font-display: var(--font-display);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -107,4 +91,101 @@ body {
 }
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(192, 57, 43, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(192, 57, 43, 0.12);
+  }
+}
+.hover-pulse:hover {
+  animation: pulse-glow 1.4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -1000px 0;
+  }
+  to {
+    background-position: 1000px 0;
+  }
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth interactions on links & buttons */
+a,
+button {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Subtle hover lift utility */
+.lift-on-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+}
+.lift-on-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Subtle press feedback */
+.press-feedback:active {
+  transform: scale(0.97);
+}
+
+/* Smoother card stack shadows */
+.card-shadow {
+  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.05),
+    0 4px 12px -2px rgba(17, 17, 17, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-shadow:hover {
+  box-shadow: 0 4px 12px rgba(17, 17, 17, 0.08),
+    0 16px 32px -8px rgba(17, 17, 17, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Smooth focus rings */
+*:focus-visible {
+  outline: 2px solid #c2185b;
+  outline-offset: 2px;
+  border-radius: 4px;
 }

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Phone,
   Mail,
@@ -15,39 +16,26 @@ import {
   Menu,
 } from "lucide-react";
 
+import { useCart } from "@/lib/cart";
+
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  {
-    label: "Product",
-    href: "/products",
-    dropdown: [
-      { label: "Premium Coffee", href: "/products?category=premium-coffee" },
-      { label: "Espresso Blends", href: "/products?category=espresso-blends" },
-      { label: "Premium Sauces", href: "/products?category=premium-sauces" },
-      { label: "Premium Syrups", href: "/products?category=premium-syrups" },
-      { label: "Matcha & Tea", href: "/products?category=matcha" },
-    ],
-  },
-  {
-    label: "Catalog",
-    href: "/products",
-    dropdown: [
-      { label: "All Products", href: "/products" },
-      { label: "White Rhino Coffee", href: "/brands/white-rhino" },
-      { label: "Barista Underground", href: "/brands/barista-underground" },
-      { label: "Coffee Bean Corral", href: "/brands/coffee-bean-corral" },
-    ],
-  },
+  { label: "Products", href: "/products" },
   { label: "Wholesale", href: "/wholesale" },
   { label: "Contact Us", href: "/contact" },
 ];
 
-export default function Navbar() {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+export default function Navbar({
+  onOpenSearch,
+}: {
+  onOpenSearch?: () => void;
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cartCount] = useState(0);
+  const { count } = useCart();
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -55,76 +43,58 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const mainNavBg = isHome
+    ? scrolled
+      ? "bg-gradient-to-b from-black/85 via-black/60 to-transparent"
+      : "bg-transparent"
+    : "bg-[#2d6a2d] border-b border-[#1f5a1f] shadow-md";
+
+  const showTopBar = isHome ? !scrolled : true;
+
   return (
     <header className="w-full fixed top-0 left-0 z-50">
-      {/* ── Top Bar ── */}
-      <div className="bg-[#2d6a2d] text-white text-sm py-2 px-4">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <a
-            href="tel:3132080888"
-            className="flex items-center gap-2 hover:text-gray-300 transition-colors"
-          >
-            <Phone size={14} />
-            <span>Phone: 313-208-0888</span>
-          </a>
+      {/* ── Top Bar (Green) ── */}
+      {showTopBar && (
+        <div className="hidden sm:block bg-[#2d6a2d] text-white text-sm py-2 px-4">
+          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <a
+              href="tel:3132080888"
+              className="flex items-center gap-2 hover:text-green-200 transition-colors"
+            >
+              <Phone size={14} />
+              <span>Phone: 313-208-0888</span>
+            </a>
 
-          <a
-            href="mailto:sale@mochawholesale.com"
-            className="flex items-center gap-2 hover:text-gray-300 transition-colors"
-          >
-            <Mail size={14} />
-            <span>Email Address: sale@mochawholesale.com</span>
-          </a>
+            <a
+              href="mailto:sale@mochawholesale.com"
+              className="flex items-center gap-2 hover:text-green-200 transition-colors"
+            >
+              <Mail size={14} />
+              <span>Email Address: sale@mochawholesale.com</span>
+            </a>
 
-          <div className="flex items-center gap-2">
-            <MapPin size={14} />
-            <span>Location: 15401 Century Dr., Suite 301, Dearborn, MI 48120</span>
+            <div className="flex items-center gap-2">
+              <MapPin size={14} />
+              <span>Location: 15401 Century Dr., Suite 301, Dearborn, MI 48120</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* ── Main Navbar (Transparent) ── */}
-      <nav className={`bg-transparent transition-all duration-300 ${scrolled ? "bg-gradient-to-b from-black/80 via-black/50 to-transparent" : ""}`}>
-        <div className="max-w-7xl mx-auto px-4 flex items-center h-24 gap-4">
+      {/* ── Main Navbar ── */}
+      <nav className={`${mainNavBg} transition-all duration-300`}>
+        <div className="max-w-7xl mx-auto px-4 flex items-center h-20 gap-2 sm:h-24 lg:h-32 lg:gap-4">
 
           {/* ── Left: Nav Links ── */}
           <div className="hidden lg:flex items-center gap-1 flex-1 justify-start">
-            {navLinks.map((link) => (
-              <div
+              {navLinks.map((link) => (
+              <Link
                 key={link.label}
-                className="relative"
-                onMouseEnter={() => link.dropdown && setOpenDropdown(link.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
+                href={link.href}
+                className="flex items-center gap-1 px-3 py-2 text-white font-medium text-sm hover:text-green-300 transition-colors whitespace-nowrap"
               >
-                <Link
-                  href={link.href}
-                  className="flex items-center gap-1 px-3 py-2 text-white font-medium text-sm hover:text-green-300 transition-colors whitespace-nowrap underline-offset-2 hover:underline"
-                >
-                  {link.label}
-                  {link.dropdown && (
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform ${
-                        openDropdown === link.label ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
-                </Link>
-
-                {link.dropdown && openDropdown === link.label && (
-                  <div className="absolute top-full left-0 mt-1 bg-white rounded shadow-lg min-w-[180px] py-1 z-50">
-                    {link.dropdown.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                {link.label}
+              </Link>
             ))}
           </div>
 
@@ -135,7 +105,7 @@ export default function Navbar() {
               alt="Mocha Wholesale Logo"
               width={220}
               height={120}
-              className="object-contain"
+              className="object-contain h-16 w-auto sm:h-20 lg:h-24"
               priority
             />
           </Link>
@@ -144,7 +114,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-3 flex-1 justify-end">
             <Link
               href="/wholesale"
-              className="bg-[#c0392b] hover:bg-[#a93226] text-white text-sm font-semibold px-4 py-2.5 rounded transition-colors whitespace-nowrap"
+              className="bg-[#c2185b] hover:bg-[#9c0e4a] text-white text-sm font-semibold px-4 py-2.5 rounded transition-colors whitespace-nowrap"
             >
               Request a Quote
             </Link>
@@ -157,6 +127,8 @@ export default function Navbar() {
             </Link>
 
             <button
+              type="button"
+              onClick={onOpenSearch}
               className="text-white hover:text-green-300 p-2 transition-colors"
               aria-label="Search"
             >
@@ -169,9 +141,9 @@ export default function Navbar() {
               aria-label="Cart"
             >
               <ShoppingCart size={20} />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#c0392b] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {cartCount}
+              {count > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#c2185b] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  {count}
                 </span>
               )}
             </Link>
@@ -205,35 +177,20 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-[#1a3d1a] text-white px-4 pb-6 space-y-1">
             {navLinks.map((link) => (
-              <div key={link.label}>
-                <Link
-                  href={link.href}
-                  className="block py-3 border-b border-green-800 text-sm font-medium hover:text-green-300 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-                {link.dropdown && (
-                  <div className="pl-4">
-                    {link.dropdown.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="block py-2 text-sm text-green-300 hover:text-white transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <Link
+                key={link.label}
+                href={link.href}
+                className="block py-3 border-b border-green-800 text-sm font-medium hover:text-green-300 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
             ))}
 
             <div className="pt-4 flex flex-col gap-3">
               <Link
                 href="/wholesale"
-                className="bg-[#c0392b] text-white text-sm font-semibold px-4 py-3 rounded text-center"
+                className="bg-[#c2185b] text-white text-sm font-semibold px-4 py-3 rounded text-center"
               >
                 Request a Quote
               </Link>
@@ -246,14 +203,19 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-6 pt-4">
-              <button className="text-white" aria-label="Search">
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                className="text-white"
+                aria-label="Search"
+              >
                 <Search size={20} />
               </button>
               <Link href="/cart" className="text-white relative" aria-label="Cart">
                 <ShoppingCart size={20} />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#c0392b] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                    {cartCount}
+                {count > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#c2185b] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                    {count}
                   </span>
                 )}
               </Link>

@@ -1,12 +1,23 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/layout";
+import { IconFacebook, IconInstagram, IconTikTok, IconWhatsApp } from "@/components/ui/icons";
 
 export function Footer() {
   return (
-    <footer className="bg-coffee-900 text-coffee-100">
-      <div className="bg-coffee-800">
-        <Container className="grid grid-cols-1 gap-6 py-10 md:grid-cols-4">
+    <footer className="relative w-full overflow-hidden pt-48">
+      {/* Background image */}
+      <Image
+        src="/footer-bg.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="relative z-10">
+        <Container className="grid grid-cols-1 gap-6 pt-20 pb-4 md:grid-cols-4">
           <FooterCell
             title="We work with"
             items={["HOLLANDER", "MONIN", "1883", "GHIRARDELLI"]}
@@ -27,60 +38,70 @@ export function Footer() {
           />
         </Container>
       </div>
-      <Container className="grid grid-cols-1 gap-10 py-14 lg:grid-cols-4">
-        <div className="lg:col-span-1">
-          <div className="font-display text-2xl font-bold text-coffee-50">
-            Mocha Wholesale
+
+      <div className="relative z-10 border-t border-white/10">
+        <Container className="grid grid-cols-1 gap-10 pt-8 pb-14 lg:grid-cols-4">
+          <div className="lg:col-span-1">
+            <Link href="/">
+              <Image
+                src="/logo.png"
+                alt="Mocha Wholesale"
+                width={280}
+                height={84}
+                className="h-auto w-64 object-contain"
+              />
+            </Link>
+            <p className="mt-4 text-sm text-gray-300">
+              Michigan-based wholesale coffee & café supplier. From sourcing to
+              shelf, we keep cafés, restaurants and offices brewing with confidence.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <SocialChip label="Facebook" href="https://facebook.com" />
+              <SocialChip label="Instagram" href="https://instagram.com" />
+              <SocialChip label="TikTok" href="https://tiktok.com" />
+              <SocialChip label="WhatsApp" href="https://wa.me/13132080888" />
+            </div>
           </div>
-          <p className="mt-3 text-sm text-coffee-200">
-            Michigan-based wholesale coffee & café supplier. From sourcing to
-            shelf, we keep cafés, restaurants and offices brewing with confidence.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <SocialChip label="Facebook" />
-            <SocialChip label="Instagram" />
-            <SocialChip label="TikTok" />
-            <SocialChip label="WhatsApp" />
-          </div>
-        </div>
-        <FooterColumn
-          title="Shop"
-          links={[
-            { label: "All Products", href: "/products" },
-            { label: "Premium Coffee", href: "/products?category=premium-coffee" },
-            { label: "Premium Sauces", href: "/products?category=premium-sauces" },
-            { label: "Premium Syrups", href: "/products?category=premium-syrups" },
-            { label: "Matcha", href: "/products?category=matcha" },
-          ]}
-        />
-        <FooterColumn
-          title="Brands"
-          links={[
-            { label: "White Rhino Coffee", href: "/brands/white-rhino" },
-            { label: "Barista Underground", href: "/brands/barista-underground" },
-            { label: "Coffee Bean Corral", href: "/brands/coffee-bean-corral" },
-          ]}
-        />
-        <FooterColumn
-          title="Company"
-          links={[
-            { label: "About Us", href: "/about" },
-            { label: "Wholesale Application", href: "/wholesale" },
-            { label: "Contact", href: "/contact" },
-            { label: "Privacy Notice", href: "/privacy" },
-            { label: "Terms of Service", href: "/terms" },
-          ]}
-        />
-      </Container>
-      <div className="border-t border-coffee-800/60">
-        <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-coffee-300 sm:flex-row">
+          <FooterColumn
+            title="Shop"
+            links={[
+              { label: "All Products", href: "/products" },
+              { label: "Premium Coffee", href: "/products?category=premium-coffee" },
+              { label: "Premium Sauces", href: "/products?category=premium-sauces" },
+              { label: "Premium Syrups", href: "/products?category=premium-syrups" },
+              { label: "Matcha", href: "/products?category=matcha" },
+            ]}
+          />
+          <FooterColumn
+            title="Brands"
+            links={[
+              { label: "White Rhino Coffee", href: "/brands/white-rhino" },
+              { label: "Barista Underground", href: "/brands/barista-underground" },
+              { label: "Coffee Bean Corral", href: "/brands/coffee-bean-corral" },
+            ]}
+          />
+          <FooterColumn
+            title="Company"
+            links={[
+              { label: "About Us", href: "/about" },
+              { label: "Wholesale Application", href: "/wholesale" },
+              { label: "Contact", href: "/contact" },
+              { label: "Privacy Notice", href: "/privacy" },
+              { label: "Terms of Service", href: "/terms" },
+            ]}
+          />
+        </Container>
+      </div>
+
+      <div className="relative z-10 border-t border-white/10">
+        <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-gray-400 sm:flex-row">
           <p>© {new Date().getFullYear()} Mocha Wholesale · 15401 Century Dr., Suite 301, Dearborn, MI 48120</p>
           <div className="flex flex-wrap items-center gap-4">
-            <Link href="/privacy" className="hover:text-coffee-100">
+            <Link href="/privacy" className="hover:text-white">
               Do not sell or share my personal information
             </Link>
             <span>·</span>
-            <Link href="/terms" className="hover:text-coffee-100">
+            <Link href="/terms" className="hover:text-white">
               Terms
             </Link>
           </div>
@@ -103,17 +124,17 @@ function FooterCell({
 }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c2185b]">
         {title}
       </p>
       {items ? (
-        <p className="mt-2 font-display text-lg text-coffee-50">{items.join(" · ")}</p>
+        <p className="mt-1 text-lg text-white">{items.join(" · ")}</p>
       ) : null}
-      {body ? <p className="mt-2 text-sm text-coffee-200">{body}</p> : null}
+      {body ? <p className="mt-2 text-sm text-gray-300">{body}</p> : null}
       {link ? (
         <Link
           href={link.href}
-          className="mt-3 inline-block text-sm font-semibold text-accent hover:text-accent-soft"
+          className="mt-3 inline-block text-sm font-semibold text-white hover:text-[#c2185b]"
         >
           {link.label}
         </Link>
@@ -131,13 +152,13 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c2185b]">
         {title}
       </p>
       <ul className="mt-3 space-y-2 text-sm">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-coffee-200 hover:text-coffee-50">
+            <Link href={l.href} className="text-gray-300 hover:text-white hover:underline">
               {l.label}
             </Link>
           </li>
@@ -147,10 +168,24 @@ function FooterColumn({
   );
 }
 
-function SocialChip({ label }: { label: string }) {
+const socialIcons: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  Facebook: IconFacebook,
+  Instagram: IconInstagram,
+  TikTok: IconTikTok,
+  WhatsApp: IconWhatsApp,
+};
+
+function SocialChip({ label, href }: { label: string; href: string }) {
+  const Icon = socialIcons[label];
   return (
-    <span className="inline-flex h-9 items-center justify-center rounded-full bg-coffee-700 px-3 text-xs font-semibold text-coffee-100">
-      {label}
-    </span>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 p-2.5 text-white transition hover:bg-[#c2185b] hover:scale-110"
+      aria-label={label}
+    >
+      {Icon ? <Icon className="h-5 w-5" /> : label}
+    </a>
   );
 }

@@ -7,9 +7,26 @@ import { useEffect, useState } from "react";
 import { IconArrowRight } from "@/components/ui/icons";
 
 const SLIDES = [
-  { image: "/bg1.png", title: "Your Partner in Premium Coffee", body: "Single-origin beans and signature blends roasted weekly. Built for cafés that won't compromise on quality." },
-  { image: "/bg2.png", title: "Crafted for the Working Barista", body: "Espresso profiles calibrated for high-volume service and built to perform on a busy bar." },
-  { image: "/bg3.png", title: "Honest Beans. No Shortcuts.", body: "Direct-trade green coffee from single-estate farms, with full traceability from cherry to cup." },
+  {
+    image: "/bg.png",
+    title: "Welcome to Port Mocha",
+    body: "Premium coffee wholesale for cafés, restaurants, and offices. Fresh-roasted beans delivered direct to your door.",
+  },
+  {
+    image: "/bg1.png",
+    title: "Your Partner in Premium Coffee",
+    body: "Single-origin beans and signature blends roasted weekly. Built for cafés that won't compromise on quality.",
+  },
+  {
+    image: "/bg2.png",
+    title: "Crafted for the Working Barista",
+    body: "Espresso profiles calibrated for high-volume service and built to perform on a busy bar.",
+  },
+  {
+    image: "/bg3.png",
+    title: "Honest Beans. No Shortcuts.",
+    body: "Direct-trade green coffee from single-estate farms, with full traceability from cherry to cup.",
+  },
 ];
 
 export function HeroSlider() {
@@ -23,7 +40,7 @@ export function HeroSlider() {
   }, []);
 
   return (
-    <section className="relative -mt-[140px] h-[640px] overflow-hidden lg:h-[740px]">
+    <section className="relative -mt-[80px] h-[480px] overflow-hidden sm:-mt-[140px] sm:h-[580px] lg:-mt-[180px] lg:h-[740px]">
       {SLIDES.map((slide, i) => (
         <div
           key={slide.image}
@@ -40,29 +57,31 @@ export function HeroSlider() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0" />
         </div>
       ))}
-      <div className="relative z-10 flex h-full items-center pt-[80px]">
+      <div className="relative z-10 flex h-full items-center pt-[80px] sm:pt-[140px] lg:pt-[180px]">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl">
-            <h1 className="font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <div
+            key={index}
+            className="max-w-xl animate-fade-in"
+          >
+            <h1 className="font-display text-3xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
               {SLIDES[index].title}
             </h1>
-            <p className="mt-4 text-lg text-gray-100">
+            <p className="mt-3 text-base text-gray-100 sm:mt-4 sm:text-lg">
               {SLIDES[index].body}
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">
               <Link
                 href="/products"
-                className="inline-flex h-11 items-center gap-2 rounded bg-[#c0392b] px-6 text-sm font-semibold text-white hover:bg-[#a93226]"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded bg-[#c2185b] px-6 text-sm font-semibold text-white hover:bg-[#9c0e4a]"
               >
                 Shop Coffee
                 <IconArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/wholesale"
-                className="inline-flex h-11 items-center gap-2 rounded border-2 border-white bg-transparent px-6 text-sm font-semibold text-white hover:bg-white/10"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded border-2 border-white bg-transparent px-6 text-sm font-semibold text-white hover:bg-white/10"
               >
                 Apply for Wholesale
               </Link>

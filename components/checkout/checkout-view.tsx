@@ -38,21 +38,19 @@ export function CheckoutView() {
 
   if (orderId) {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-coffee-200 bg-white p-10 text-center smooth-shadow">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-success text-white">
+      <div className="mx-auto max-w-xl rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#2d6a2d] text-white">
           <IconCheck className="h-7 w-7" />
         </span>
-        <h2 className="mt-5 font-display text-3xl font-bold text-coffee-900">
-          Order placed.
-        </h2>
-        <p className="mt-2 text-sm text-coffee-700">
+        <h2 className="mt-5 text-3xl font-bold text-gray-900">Order placed.</h2>
+        <p className="mt-2 text-sm text-gray-600">
           Thanks! Your order <span className="font-semibold">{orderId}</span>{" "}
           is in. A confirmation will land in your inbox shortly. Our wholesale
           team will reach out to confirm delivery.
         </p>
         <Link
           href="/products"
-          className="mt-6 inline-flex h-11 items-center rounded-full bg-coffee-800 px-6 text-sm font-semibold text-coffee-50 hover:bg-coffee-900"
+          className="mt-6 inline-flex h-11 items-center rounded-full bg-[#c2185b] px-6 text-sm font-bold text-white shadow-sm transition hover:bg-[#9c0e4a]"
         >
           Keep shopping
         </Link>
@@ -62,11 +60,9 @@ export function CheckoutView() {
 
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-coffee-300 bg-white p-12 text-center">
-        <p className="font-display text-2xl font-bold text-coffee-900">
-          Nothing to checkout.
-        </p>
-        <p className="mx-auto mt-2 max-w-sm text-sm text-coffee-700">
+      <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-12 text-center">
+        <p className="text-2xl font-bold text-gray-900">Nothing to checkout.</p>
+        <p className="mx-auto mt-2 max-w-sm text-sm text-gray-600">
           Your cart is empty. Add a few items and come back.
         </p>
         <Link href="/products" className="mt-6 inline-block">
@@ -79,11 +75,9 @@ export function CheckoutView() {
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
       <form onSubmit={placeOrder} className="space-y-8">
-        <section className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
-          <h2 className="font-display text-xl font-bold text-coffee-900">
-            Checkout type
-          </h2>
-          <p className="mt-1 text-sm text-coffee-600">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">Checkout type</h2>
+          <p className="mt-1 text-sm text-gray-600">
             Guests can checkout right away. Sign in to apply approved wholesale
             pricing and view your standing orders.
           </p>
@@ -94,14 +88,14 @@ export function CheckoutView() {
               className={cn(
                 "rounded-xl border p-4 text-left transition",
                 mode === "guest"
-                  ? "border-coffee-800 bg-coffee-50 ring-1 ring-coffee-800"
-                  : "border-coffee-200 bg-white hover:border-coffee-400"
+                  ? "border-[#c2185b] bg-pink-50 ring-1 ring-[#c2185b]"
+                  : "border-gray-200 bg-white hover:border-gray-400"
               )}
             >
-              <p className="text-sm font-semibold text-coffee-900">
+              <p className="text-sm font-semibold text-gray-900">
                 Checkout as guest
               </p>
-              <p className="mt-1 text-xs text-coffee-600">
+              <p className="mt-1 text-xs text-gray-600">
                 Retail pricing. No account required.
               </p>
             </button>
@@ -111,15 +105,15 @@ export function CheckoutView() {
               className={cn(
                 "rounded-xl border p-4 text-left transition",
                 mode === "signin"
-                  ? "border-coffee-800 bg-coffee-50 ring-1 ring-coffee-800"
-                  : "border-coffee-200 bg-white hover:border-coffee-400"
+                  ? "border-[#c2185b] bg-pink-50 ring-1 ring-[#c2185b]"
+                  : "border-gray-200 bg-white hover:border-gray-400"
               )}
             >
-              <p className="flex items-center gap-2 text-sm font-semibold text-coffee-900">
+              <p className="flex items-center gap-2 text-sm font-semibold text-gray-900">
                 <IconLock className="h-3.5 w-3.5" />
                 Sign in for member pricing
               </p>
-              <p className="mt-1 text-xs text-coffee-600">
+              <p className="mt-1 text-xs text-gray-600">
                 {user
                   ? `Signed in as ${user.email}`
                   : "Apply wholesale pricing & standing orders."}
@@ -127,7 +121,7 @@ export function CheckoutView() {
               {!user && mode === "signin" && (
                 <Link
                   href="/account/login?return=/checkout"
-                  className="mt-2 inline-block text-xs font-semibold text-coffee-800 underline"
+                  className="mt-2 inline-block text-xs font-semibold text-[#c2185b] underline"
                 >
                   Sign in / Register →
                 </Link>
@@ -136,8 +130,8 @@ export function CheckoutView() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
-          <h2 className="font-display text-xl font-bold text-coffee-900">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">
             Contact information
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -158,19 +152,21 @@ export function CheckoutView() {
             />
           </div>
           {mode === "guest" && (
-            <p className="mt-3 text-xs text-coffee-600">
+            <p className="mt-3 text-xs text-gray-600">
               We'll only email you about this order. Create an account at any
               time to manage standing orders.
             </p>
           )}
         </section>
 
-        <section className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
-          <h2 className="font-display text-xl font-bold text-coffee-900">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">
             Business information
           </h2>
-          <p className="mt-1 text-sm text-coffee-600">
-            Required for delivery. {mode === "guest" && "We use this to verify your order with our wholesale desk."}
+          <p className="mt-1 text-sm text-gray-600">
+            Required for delivery.{" "}
+            {mode === "guest" &&
+              "We use this to verify your order with our wholesale desk."}
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <Input
@@ -213,28 +209,26 @@ export function CheckoutView() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
-          <h2 className="font-display text-xl font-bold text-coffee-900">
-            Payment
-          </h2>
-          <p className="mt-1 text-sm text-coffee-600">
+        <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">Payment</h2>
+          <p className="mt-1 text-sm text-gray-600">
             Net-30 terms available for approved wholesale accounts. New
             customers pay by card.
           </p>
           <div className="mt-4 grid gap-4">
-            <label className="flex items-center gap-3 rounded-xl border border-coffee-200 bg-coffee-50 p-4">
+            <label className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-4">
               <input
                 type="radio"
                 name="paymentMethod"
                 value="card"
                 defaultChecked
-                className="h-4 w-4 accent-coffee-800"
+                className="h-4 w-4 accent-[#c2185b]"
               />
               <div>
-                <p className="text-sm font-semibold text-coffee-900">
+                <p className="text-sm font-semibold text-gray-900">
                   Credit / Debit Card
                 </p>
-                <p className="text-xs text-coffee-600">
+                <p className="text-xs text-gray-600">
                   Visa, Mastercard, Amex, Discover, PayPal.
                 </p>
               </div>
@@ -243,8 +237,8 @@ export function CheckoutView() {
               className={cn(
                 "flex items-center gap-3 rounded-xl border p-4",
                 user?.role === "wholesale" && user.approved
-                  ? "border-coffee-200 bg-white"
-                  : "border-coffee-200 bg-coffee-50 opacity-70"
+                  ? "border-gray-200 bg-white"
+                  : "border-gray-200 bg-gray-50 opacity-70"
               )}
             >
               <input
@@ -252,13 +246,13 @@ export function CheckoutView() {
                 name="paymentMethod"
                 value="net30"
                 disabled={!(user?.role === "wholesale" && user.approved)}
-                className="h-4 w-4 accent-coffee-800"
+                className="h-4 w-4 accent-[#c2185b]"
               />
               <div>
-                <p className="text-sm font-semibold text-coffee-900">
+                <p className="text-sm font-semibold text-gray-900">
                   Net-30 terms
                 </p>
-                <p className="text-xs text-coffee-600">
+                <p className="text-xs text-gray-600">
                   Available for approved wholesale accounts.
                 </p>
               </div>
@@ -269,7 +263,7 @@ export function CheckoutView() {
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/cart"
-            className="text-sm font-semibold text-coffee-700 hover:text-coffee-900"
+            className="text-sm font-semibold text-gray-700 hover:text-[#c2185b]"
           >
             ← Back to cart
           </Link>
@@ -280,49 +274,47 @@ export function CheckoutView() {
         </div>
       </form>
 
-      <aside className="rounded-2xl border border-coffee-200 bg-white p-6 smooth-shadow">
-        <p className="text-xs font-semibold uppercase tracking-wider text-coffee-600">
+      <aside className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
           {pricingMode === "wholesale" ? "Wholesale pricing" : "Retail pricing"}
         </p>
-        <h2 className="mt-1 font-display text-xl font-bold text-coffee-900">
-          Order summary
-        </h2>
+        <h2 className="mt-1 text-xl font-bold text-gray-900">Order summary</h2>
         <ul className="mt-4 space-y-3">
           {items.map((item) => (
             <li
               key={item.variantId}
               className="flex items-center gap-3 text-sm"
             >
-              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md bg-coffee-100">
+              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md bg-gray-50">
                 <Image
                   src={item.image}
                   alt={item.productName}
                   fill
                   sizes="48px"
-                  className="object-cover"
+                  className="object-contain p-1"
                 />
               </div>
               <div className="flex-1">
-                <p className="text-xs font-semibold text-coffee-900">
+                <p className="text-xs font-semibold text-gray-900">
                   {item.productName}
                 </p>
-                <p className="text-[11px] text-coffee-600">
+                <p className="text-[11px] text-gray-600">
                   {item.variantLabel} × {item.quantity}
                 </p>
               </div>
-              <p className="text-sm font-semibold text-coffee-900">
+              <p className="text-sm font-semibold text-gray-900">
                 {formatCurrency(item.unitPrice * item.quantity)}
               </p>
             </li>
           ))}
         </ul>
-        <dl className="mt-5 space-y-2 border-t border-coffee-200 pt-4 text-sm">
+        <dl className="mt-5 space-y-2 border-t border-gray-200 pt-4 text-sm">
           <Row label="Subtotal" value={formatCurrency(subtotal)} />
           <Row
             label="Shipping"
             value={
               shipping === 0 ? (
-                <span className="text-success">Free</span>
+                <span className="font-semibold text-[#2d6a2d]">Free</span>
               ) : (
                 formatCurrency(shipping)
               )
@@ -335,7 +327,7 @@ export function CheckoutView() {
             bold
           />
         </dl>
-        <p className="mt-4 text-xs text-coffee-600">
+        <p className="mt-4 text-xs text-gray-600">
           Final shipping & tax will be confirmed by our wholesale desk within
           one business day.
         </p>
@@ -355,14 +347,14 @@ function Row({
 }) {
   return (
     <div className="flex items-baseline justify-between">
-      <p className={bold ? "font-semibold text-coffee-900" : "text-coffee-700"}>
+      <p className={bold ? "font-semibold text-gray-900" : "text-gray-700"}>
         {label}
       </p>
       <p
         className={
           bold
-            ? "font-display text-lg font-bold text-coffee-900"
-            : "font-semibold text-coffee-900"
+            ? "text-lg font-bold text-gray-900"
+            : "font-semibold text-gray-900"
         }
       >
         {value}

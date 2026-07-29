@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -32,30 +33,32 @@ export function SearchDialog({
 
   const results = useMemo(() => searchProducts(query), [query]);
 
+  if (!open) return null;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-coffee-900/40 px-4 pt-20 backdrop-blur-sm">
-      <div className="w-full max-w-2xl rounded-2xl bg-coffee-50 shadow-2xl animate-fade-in">
-        <div className="flex items-center gap-3 border-b border-coffee-200 px-5 py-4">
-          <IconSearch className="h-5 w-5 text-coffee-700" />
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 px-4 pt-20 backdrop-blur-sm">
+      <div className="w-full max-w-2xl animate-fade-in rounded-2xl bg-white shadow-2xl">
+        <div className="flex items-center gap-3 border-b border-gray-200 px-5 py-4">
+          <IconSearch className="h-5 w-5 text-gray-500" />
           <input
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search products, brands, flavors…"
-            className="flex-1 bg-transparent text-base text-coffee-900 placeholder:text-coffee-500 focus:outline-none"
+            className="flex-1 bg-transparent text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
           />
           <button
             type="button"
             onClick={onClose}
             aria-label="Close search"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-coffee-800 hover:bg-coffee-100"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-700 hover:bg-gray-100"
           >
             <IconClose className="h-5 w-5" />
           </button>
         </div>
         <div className="max-h-[60vh] overflow-y-auto px-3 py-3">
           {query.trim().length === 0 && (
-            <div className="px-4 py-6 text-sm text-coffee-700">
+            <div className="px-4 py-6 text-sm text-gray-700">
               <p className="font-semibold">Quick links</p>
               <ul className="mt-3 space-y-2">
                 {[
@@ -69,7 +72,7 @@ export function SearchDialog({
                     <Link
                       href={s.href}
                       onClick={onClose}
-                      className="block rounded-md px-3 py-2 hover:bg-coffee-100"
+                      className="block rounded-md px-3 py-2 text-gray-800 hover:bg-gray-100 hover:text-[#c2185b]"
                     >
                       {s.label}
                     </Link>
@@ -79,8 +82,8 @@ export function SearchDialog({
             </div>
           )}
           {query.trim().length > 0 && results.length === 0 && (
-            <p className="px-4 py-6 text-sm text-coffee-700">
-              No products match “{query}”. Try a different keyword.
+            <p className="px-4 py-6 text-sm text-gray-700">
+              No products match "{query}". Try a different keyword.
             </p>
           )}
           {results.length > 0 && (
@@ -90,23 +93,26 @@ export function SearchDialog({
                   <Link
                     href={`/products/${p.slug}`}
                     onClick={onClose}
-                    className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-coffee-100"
+                    className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-gray-100"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={p.image}
-                      alt=""
-                      className="h-12 w-12 rounded-md object-cover"
-                    />
+                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md bg-gray-50">
+                      <Image
+                        src={p.image}
+                        alt=""
+                        fill
+                        sizes="48px"
+                        className="object-contain p-1"
+                      />
+                    </div>
                     <div className="flex-1">
-                      <div className="text-sm font-semibold text-coffee-900">
+                      <div className="text-sm font-semibold text-gray-900">
                         {p.name}
                       </div>
-                      <div className="text-xs text-coffee-600">
+                      <div className="text-xs text-gray-600 line-clamp-1">
                         {p.shortDescription}
                       </div>
                     </div>
-                    <div className="text-right text-xs font-semibold text-coffee-800">
+                    <div className="text-right text-xs font-semibold text-[#c2185b]">
                       from {formatCurrency(p.variants[0].wholesalePrice)}
                     </div>
                   </Link>
