@@ -22,11 +22,6 @@ const SLIDES = [
     title: "Crafted for the Working Barista",
     body: "Espresso profiles calibrated for high-volume service and built to perform on a busy bar.",
   },
-  {
-    image: "/bg3.png",
-    title: "Honest Beans. No Shortcuts.",
-    body: "Direct-trade green coffee from single-estate farms, with full traceability from cherry to cup.",
-  },
 ];
 
 export function HeroSlider() {
