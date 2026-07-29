@@ -35,6 +35,14 @@ export const metadata: Metadata = {
     "Biscoff wholesale",
     "matcha wholesale",
   ],
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/logo.png", type: "image/png" },
+    ],
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "Mocha Wholesale",
     description:
