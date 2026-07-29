@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbf7f2;
+  --foreground: #1f1410;
+  --coffee-50: #faf5ef;
+  --coffee-100: #f3e9dc;
+  --coffee-200: #e6d2b6;
+  --coffee-300: #d3b387;
+  --coffee-400: #b89260;
+  --coffee-500: #8e6a3f;
+  --coffee-600: #6b4f2d;
+  --coffee-700: #4f3a22;
+  --coffee-800: #3a2a18;
+  --coffee-900: #231810;
+  --accent: #c9a368;
+  --accent-soft: #e8d4a8;
+  --danger: #b94a3b;
+  --success: #4d7c3a;
+  --muted: #8a7560;
+  --border: #e8dccb;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-coffee-50: var(--coffee-50);
+  --color-coffee-100: var(--coffee-100);
+  --color-coffee-200: var(--coffee-200);
+  --color-coffee-300: var(--coffee-300);
+  --color-coffee-400: var(--coffee-400);
+  --color-coffee-500: var(--coffee-500);
+  --color-coffee-600: var(--coffee-600);
+  --color-coffee-700: var(--coffee-700);
+  --color-coffee-800: var(--coffee-800);
+  --color-coffee-900: var(--coffee-900);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.smooth-shadow {
+  box-shadow: 0 1px 2px rgba(35, 24, 16, 0.06),
+    0 8px 24px -8px rgba(35, 24, 16, 0.18);
+}
+
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
