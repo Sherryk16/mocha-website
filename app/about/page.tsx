@@ -50,7 +50,7 @@ export default function AboutPage() {
             src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1800&q=80"
             alt=""
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover"
           />

@@ -247,7 +247,7 @@ export default function Navbar({
               width={220}
               height={120}
               className="object-contain h-16 w-auto sm:h-20 lg:h-24"
-              priority
+              preload
             />
           </Link>
 

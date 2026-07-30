@@ -10,7 +10,7 @@ export function WelcomeSection() {
         src="/sectionbg.webp"
         alt=""
         fill
-        priority
+        preload
         sizes="100vw"
         className="object-cover"
       />
@@ -88,7 +88,7 @@ export function WelcomeSection() {
             alt="Port Mocha Wholesale products"
             width={1600}
             height={1200}
-            priority
+            preload
             sizes="(max-width: 768px) 100vw, 60vw"
             className="h-auto w-full animate-float"
           />

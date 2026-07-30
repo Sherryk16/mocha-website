@@ -127,7 +127,7 @@ function DetailBody({
               src={image}
               alt={name}
               fill
-              priority
+              preload
               sizes="(max-width: 1024px) 100vw, 50vw"
               className={cn(
                 "object-contain p-8 transition-transform duration-700 ease-out",

@@ -48,7 +48,7 @@ export function HeroSlider() {
             src={slide.image}
             alt=""
             fill
-            priority={i === 0}
+            preload={i === 0}
             sizes="100vw"
             className="object-cover"
           />

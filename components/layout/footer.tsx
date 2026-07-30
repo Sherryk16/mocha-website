@@ -17,7 +17,7 @@ export function Footer() {
         src="/footer-bg1.png"
         alt=""
         fill
-        priority
+        preload
         sizes="100vw"
         className="object-cover"
       />

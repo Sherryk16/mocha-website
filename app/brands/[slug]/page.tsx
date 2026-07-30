@@ -46,7 +46,7 @@ export default async function BrandPage({
             src={brand.hero}
             alt=""
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover"
           />
